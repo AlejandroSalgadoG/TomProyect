@@ -1,12 +1,167 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>TomApp</title>
+        <title>TomApp</title>
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            
+            header {
+                background-color: #666;
+                padding: 5px;
+                text-align: center;
+                font-size: 12px;
+                color: white;
+            }
+            
+            section:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            
+            footer {
+                background-color: #777;
+                padding: 10px;
+                text-align: center;
+                color: white;
+            }
+
+            button {
+                background-color: white;
+                border: none;
+                color: black;
+                font-size: 15px;
+            }
+
+            .column {
+                float: left;
+                width: 33.33%;
+                padding: 10px;
+            }
+            
+            .elem1{
+                float: left;
+                width: 80%;
+                padding: 5px;
+                text-align: left;
+            }
+            
+            
+            .elem2{
+                float: left;
+                width: 10%;
+                padding: 5px;
+            }
+            
+            .elem3{
+                float: left;
+                width: 10%;
+                padding: 5px;
+                background-color: #FF0000;
+            }
+
+            .separator {
+                border-bottom: 3px solid white;
+                border-left: white;
+                border-right: white;
+                padding: 5px;
+            }
+
+        </style>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
-    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <script>
+        function get_child(childs, id_name){
+            for(var i=0; i<childs.length; i++) if(childs[i].id == id_name) return childs[i];
+            return null;
+        }
+
+        function btn_selected(button){
+            var label = get_child(button.parentElement.childNodes, "quantity");
+
+            button.style.backgroundColor="green";
+            button.style.color="white";
+            label.innerHTML++;
+        }
+
+        function btn_deselected(button){
+            var label = get_child(button.parentElement.childNodes, "quantity");
+            var quantity = label.innerHTML;
+
+            if(quantity == 0) return;
+
+            if(quantity == 1){
+                var product = get_child(button.parentElement.childNodes, "product");
+                product.style.backgroundColor="white";
+                product.style.color="black";
+            }
+
+            label.innerHTML--;
+        }
+
+    </script> 
 
     <body>
-        <h1>Bienvenido</h1>
+
+        <header>
+            <h1>Bienvenido</h1>
+        </header>
+
+
+        <section>
+            <div class="column">
+                <div> 
+                    <button class="elem1" id="product" onclick="btn_selected(this)">Some</button> 
+                    <label class="elem2" id="quantity">0</label>
+                    <button class="elem3" id="remove" onclick="btn_deselected(this)">X</button> 
+                </div>
+                <div> 
+                    <button class="elem1" id="product" onclick="button_selected(this)">Some</button> 
+                    <label class="elem2" id="quantity" style="background-color:#bbb;">0</label>
+                    <button class="elem3" id="remove">X</button> 
+                </div>
+                <div> 
+                    <button class="elem1">Some</button> 
+                    <label class="elem2" style="background-color:#bbb;">0</label>
+                    <button class="elem3">X</button> 
+                </div>
+
+                <hr class="separator">
+
+                <div> 
+                    total $ 0
+                </div>
+            </div>
+
+            <div class="column" style="background-color:#bbb;">
+                <div> 
+                    <button class="elem1">Some</button> 
+                    <label class="elem2" style="background-color:#bbb;">0</label>
+                    <button class="elem3">X</button> 
+                </div>
+            </div>
+            <div class="column" style="background-color:#ccc;">
+                <div> 
+                    <button class="elem1">Some</button> 
+                    <label class="elem2" style="background-color:#bbb;">0</label>
+                    <button class="elem3">X</button> 
+                </div>
+            </div>
+
+        </section>
+
+        <footer>
+            <label> Total </label>
+        </footer>
+
     </body>
 </html>
