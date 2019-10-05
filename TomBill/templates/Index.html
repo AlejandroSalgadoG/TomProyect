@@ -6,12 +6,14 @@
         <style>
             * {
                 box-sizing: border-box;
+                margin: 0;
+                padding: 0;
             }
-            
+
             body {
                 font-family: Arial, Helvetica, sans-serif;
             }
-            
+
             header {
                 background-color: #666;
                 padding: 5px;
@@ -19,18 +21,18 @@
                 font-size: 12px;
                 color: white;
             }
-            
+
             section:after {
                 content: "";
                 display: table;
                 clear: both;
             }
-            
+
             footer {
                 background-color: #777;
-                padding: 10px;
                 text-align: center;
                 color: white;
+                height: 41px;
             }
 
             button {
@@ -40,31 +42,56 @@
                 font-size: 15px;
             }
 
+            input {
+                border: 0;
+            }
+
+            .submit_button{
+                float: right;
+                padding: 12px 28px;
+                display: inline-block;
+                background-color: #b22222;
+                margin-right: 10px;
+                color: white;
+            }
+
+            .section_title{
+                color: black;
+                font-size: 20px;
+                text-align: center;
+            }
+
+            .total{
+                color: black;
+                font-size: 17px;
+                text-align: right;
+            }
+
             .column {
                 float: left;
                 width: 33.33%;
                 padding: 10px;
             }
-            
+
             .elem1{
                 float: left;
                 width: 80%;
                 padding: 5px;
                 text-align: left;
             }
-            
-            
+
+
             .elem2{
                 float: left;
                 width: 10%;
                 padding: 5px;
             }
-            
+
             .elem3{
                 float: left;
                 width: 10%;
-                padding: 5px;
-                background-color: #FF0000;
+                padding: 12px;
+                background-color: #d83131;
             }
 
             .separator {
@@ -74,41 +101,63 @@
                 padding: 5px;
             }
 
+            @media screen and (max-width: 825px) {
+              .column {
+                width: 100%;
+              }
+            }
+
         </style>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <script>
-        function get_child(childs, id_name){
+        function get_child(father, id_name){
+            var childs = father.childNodes;
             for(var i=0; i<childs.length; i++) if(childs[i].id == id_name) return childs[i];
             return null;
         }
 
-        function btn_selected(button){
-            var label = get_child(button.parentElement.childNodes, "quantity");
+        function selected(button, quantity, price, section){
+            button.style.backgroundColor= "#63e76c";
+            quantity.value++;
 
-            button.style.backgroundColor="green";
-            button.style.color="white";
-            label.innerHTML++;
+            update_section_total(section, price, add);
+            update_total(price, add);
         }
 
-        function btn_deselected(button){
-            var label = get_child(button.parentElement.childNodes, "quantity");
-            var quantity = label.innerHTML;
+        function deselected(button, quantity, price, section){
+            if(quantity.value == 0) return;
 
-            if(quantity == 0) return;
-
-            if(quantity == 1){
-                var product = get_child(button.parentElement.childNodes, "product");
+            if(quantity.value == 1){
+                var product = get_child(button.parentElement, "product");
                 product.style.backgroundColor="white";
-                product.style.color="black";
             }
 
-            label.innerHTML--;
+            quantity.value--;
+
+            update_section_total(section, price, substract);
+            update_total(price, substract);
         }
 
-    </script> 
+        function add(a,b){ return a+b; }
+        function substract(a,b){ return a-b; }
+
+        function update_section_total(section, price, action){
+            var section = document.getElementById(section);
+            var label = get_child(section, "total");
+            var total = parseInt(label.innerHTML);
+            label.innerHTML = action(total, price);
+        }
+
+        function update_total(price, action){
+            var label = document.getElementById("final_total");
+            var total = parseInt(label.innerHTML);
+            label.innerHTML = action(total, price);
+        }
+
+    </script>
 
     <body>
 
@@ -117,51 +166,86 @@
         </header>
 
 
+        <form method="post">
+
         <section>
             <div class="column">
-                <div> 
-                    <button class="elem1" id="product" onclick="btn_selected(this)">Some</button> 
-                    <label class="elem2" id="quantity">0</label>
-                    <button class="elem3" id="remove" onclick="btn_deselected(this)">X</button> 
+                <h3 class="section_title"> Sodas </h3>
+
+                {% for id, product, price in sodas%}
+
+                <div>
+                    <button type="button" class="elem1" id="product" onclick="selected(this, {{id}}, {{price}}, 'total_sodas')">
+                        {{product}}
+                    </button>
+                    <input class="elem2" name="{{id}}" value="0" readonly/>
+                    <button type="button" class="elem3" id="remove" onclick="deselected(this, {{id}}, {{price}}, 'total_sodas')"></button>
                 </div>
-                <div> 
-                    <button class="elem1" id="product" onclick="button_selected(this)">Some</button> 
-                    <label class="elem2" id="quantity" style="background-color:#bbb;">0</label>
-                    <button class="elem3" id="remove">X</button> 
-                </div>
-                <div> 
-                    <button class="elem1">Some</button> 
-                    <label class="elem2" style="background-color:#bbb;">0</label>
-                    <button class="elem3">X</button> 
-                </div>
+
+                {% endfor %}
 
                 <hr class="separator">
 
-                <div> 
-                    total $ 0
+                <div class="total" id="total_sodas">
+                    Subtotal $
+                    <label id="total">0</label>
                 </div>
             </div>
 
-            <div class="column" style="background-color:#bbb;">
-                <div> 
-                    <button class="elem1">Some</button> 
-                    <label class="elem2" style="background-color:#bbb;">0</label>
-                    <button class="elem3">X</button> 
+            <div class="column">
+                <h3 class="section_title"> Panaderia </h3>
+
+                {% for id, product, price in bakery%}
+
+                <div>
+                    <button type="button" class="elem1" id="product" onclick="selected(this, {{id}}, {{price}}, 'total_bakery')">
+                        {{product}}
+                    </button>
+                    <input class="elem2" name="{{id}}" value="0" readonly/>
+                    <button type="button" class="elem3" id="remove" onclick="deselected(this, {{id}}, {{price}}, 'total_bakery')"></button>
                 </div>
-            </div>
-            <div class="column" style="background-color:#ccc;">
-                <div> 
-                    <button class="elem1">Some</button> 
-                    <label class="elem2" style="background-color:#bbb;">0</label>
-                    <button class="elem3">X</button> 
+
+                {% endfor %}
+
+                <hr class="separator">
+
+                <div class="total" id="total_bakery">
+                    Subtotal $
+                    <label id="total">0</label>
                 </div>
             </div>
 
+            <div class="column">
+                <h3 class="section_title"> Café </h3>
+
+                {% for id, product, price in coffe%}
+
+                <div>
+                    <button type="button" class="elem1" id="product" onclick="selected(this, {{id}}, {{price}}, 'total_coffe')">
+                        {{product}}
+                    </button>
+                    <input class="elem2" name="{{id}}" value="0" readonly/>
+                    <button type="button" class="elem3" id="remove" onclick="deselected(this, {{id}}, {{price}}, 'total_coffe')"></button>
+                </div>
+
+                {% endfor %}
+
+                <hr class="separator">
+
+                <div class="total" id="total_coffe">
+                    Subtotal $
+                    <label id="total">0</label>
+                </div>
+            </div>
         </section>
 
         <footer>
-            <label> Total </label>
+            Total $
+            <label id="final_total">0</label>
+            <button type="submit" class="submit_button" formaction="/bill/save_bill/"> imprimir </button>
         </footer>
+
+        </form>
 
     </body>
 </html>
