@@ -112,13 +112,15 @@
     </head>
 
     <script>
-        var n_additions = 0;
+        var additions = [];
 
         function add(a,b){ return a+b; }
         function sub(a,b){ return a-b; }
 
         function highlight(element){ element.style.backgroundColor= "#63e76c"; }
         function unhighlight(element){ element.style.backgroundColor= "white"; }
+
+        function remove_elem(list, elem){ return list.splice(list.indexOf(elem), 1); }
 
         function update_section_total(action, price, html_section){
             var html_section_total = document.getElementById(html_section);
@@ -135,6 +137,24 @@
         function update_bill(action, price, section){
             update_section_total(action, price, section);
             update_total(action, price);
+        }
+
+        function add_addition(price){
+            additions.push(price);
+            update_additions_price(add);
+        }
+
+        function sub_addition(price){
+            remove_elem(additions, price);
+            update_additions_price(sub);
+        }
+
+        function update_additions_price(action){
+            var billed_additions = additions.sort().slice(2);
+            var addition_price = billed_additions.reduce(add, 0);
+            var subtotal = document.getElementById('total_additions').innerHTML;
+            var price = Math.abs(subtotal-addition_price);
+            update_bill(action, price, 'total_additions');
         }
     </script>
 
@@ -158,9 +178,9 @@
                         {{product}}
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
-                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
-                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_double');
-                                                                 }">
+                    <button type="button" class="elem3" onclick="if({{id}}.value == 0) return;
+                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}}); 
+                                                                 {{id}}.value--; update_bill(sub, {{price}}, 'total_double');">
                     </button>
                 </div>
 
@@ -178,13 +198,13 @@
                 {% for id, product, price in additions%}
 
                 <div>
-                    <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_additions')">
+                    <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; add_addition({{price}})">
                         {{product}}
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
-                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
-                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_additions');
-                                                                 }">
+                    <button type="button" class="elem3" onclick="if({{id}}.value == 0) return;
+                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}}); 
+                                                                 {{id}}.value--; sub_addition({{price}});">
                     </button>
                 </div>
 
@@ -209,9 +229,9 @@
                         {{product}}
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
-                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
-                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_sodas');
-                                                                 }">
+                    <button type="button" class="elem3" onclick="if({{id}}.value == 0) return;
+                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}});
+                                                                 {{id}}.value--; update_bill(sub, {{price}}, 'total_sodas');">
                     </button>
                 </div>
 
@@ -235,9 +255,9 @@
                         {{product}}
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
-                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
-                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_coffe');
-                                                                 }">
+                    <button type="button" class="elem3" onclick="if({{id}}.value == 0) return;
+                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}});
+                                                                 {{id}}.value--; update_bill(sub, {{price}}, 'total_coffe');">
                     </button>
                 </div>
 
@@ -259,9 +279,10 @@
                         {{product}}
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
-                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
-                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_bakery');
-                                                                 }"></button>
+                    <button type="button" class="elem3" onclick="if({{id}}.value == 0) return;
+                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}});
+                                                                 {{id}}.value--; update_bill(sub, {{price}}, 'total_bakery');">
+                    </button>
                 </div>
 
                 {% endfor %}
