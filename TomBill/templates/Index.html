@@ -80,7 +80,6 @@
                 text-align: left;
             }
 
-
             .elem2{
                 float: left;
                 width: 10%;
@@ -113,50 +112,30 @@
     </head>
 
     <script>
-        function get_child(father, id_name){
-            var childs = father.childNodes;
-            for(var i=0; i<childs.length; i++) if(childs[i].id == id_name) return childs[i];
-            return null;
-        }
-
-        function selected(button, quantity, price, section){
-            button.style.backgroundColor= "#63e76c";
-            quantity.value++;
-
-            update_section_total(section, price, add);
-            update_total(price, add);
-        }
-
-        function deselected(button, quantity, price, section){
-            if(quantity.value == 0) return;
-
-            if(quantity.value == 1){
-                var product = get_child(button.parentElement, "product");
-                product.style.backgroundColor="white";
-            }
-
-            quantity.value--;
-
-            update_section_total(section, price, substract);
-            update_total(price, substract);
-        }
+        var n_additions = 0;
 
         function add(a,b){ return a+b; }
-        function substract(a,b){ return a-b; }
+        function sub(a,b){ return a-b; }
 
-        function update_section_total(section, price, action){
-            var section = document.getElementById(section);
-            var label = get_child(section, "total");
-            var total = parseInt(label.innerHTML);
-            label.innerHTML = action(total, price);
+        function highlight(element){ element.style.backgroundColor= "#63e76c"; }
+        function unhighlight(element){ element.style.backgroundColor= "white"; }
+
+        function update_section_total(action, price, html_section){
+            var html_section_total = document.getElementById(html_section);
+            var section_total = parseInt(html_section_total.innerHTML);
+            html_section_total.innerHTML = action(section_total, price);
         }
 
-        function update_total(price, action){
-            var label = document.getElementById("final_total");
-            var total = parseInt(label.innerHTML);
-            label.innerHTML = action(total, price);
+        function update_total(action, price){
+            var html_total = document.getElementById("final_total");
+            var total = parseInt(html_total.innerHTML);
+            html_total.innerHTML = action(total, price);
         }
 
+        function update_bill(action, price, section){
+            update_section_total(action, price, section);
+            update_total(action, price);
+        }
     </script>
 
     <body>
@@ -170,48 +149,79 @@
 
         <section>
             <div class="column">
+                <h3 class="section_title"> Sodas Dobles </h3>
+
+                {% for id, product, price in double_sodas%}
+
+                <div>
+                    <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_double')">
+                        {{product}}
+                    </button>
+                    <input class="elem2" name="{{id}}" value="0" readonly/>
+                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
+                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_double');
+                                                                 }">
+                    </button>
+                </div>
+
+                {% endfor %}
+
+                <hr class="separator">
+
+                <div class="total">
+                    Subtotal $
+                    <label id="total_double">0</label>
+                </div>
+
+                <h3 class="section_title"> Adiciones </h3>
+
+                {% for id, product, price in additions%}
+
+                <div>
+                    <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_additions')">
+                        {{product}}
+                    </button>
+                    <input class="elem2" name="{{id}}" value="0" readonly/>
+                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
+                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_additions');
+                                                                 }">
+                    </button>
+                </div>
+
+                {% endfor %}
+
+                <hr class="separator">
+
+                <div class="total">
+                    Subtotal $
+                    <label id="total_additions">0</label>
+                </div>
+
+            </div>
+
+            <div class="column">
                 <h3 class="section_title"> Sodas </h3>
 
                 {% for id, product, price in sodas%}
 
                 <div>
-                    <button type="button" class="elem1" id="product" onclick="selected(this, {{id}}, {{price}}, 'total_sodas')">
+                    <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_sodas')">
                         {{product}}
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
-                    <button type="button" class="elem3" id="remove" onclick="deselected(this, {{id}}, {{price}}, 'total_sodas')"></button>
+                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
+                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_sodas');
+                                                                 }">
+                    </button>
                 </div>
 
                 {% endfor %}
 
                 <hr class="separator">
 
-                <div class="total" id="total_sodas">
+                <div class="total">
                     Subtotal $
-                    <label id="total">0</label>
-                </div>
-            </div>
-
-            <div class="column">
-                <h3 class="section_title"> Panaderia </h3>
-
-                {% for id, product, price in bakery%}
-
-                <div>
-                    <button type="button" class="elem1" id="product" onclick="selected(this, {{id}}, {{price}}, 'total_bakery')">
-                        {{product}}
-                    </button>
-                    <input class="elem2" name="{{id}}" value="0" readonly/>
-                    <button type="button" class="elem3" id="remove" onclick="deselected(this, {{id}}, {{price}}, 'total_bakery')"></button>
-                </div>
-
-                {% endfor %}
-
-                <hr class="separator">
-
-                <div class="total" id="total_bakery">
-                    Subtotal $
-                    <label id="total">0</label>
+                    <label id="total_sodas">0</label>
                 </div>
             </div>
 
@@ -221,21 +231,48 @@
                 {% for id, product, price in coffe%}
 
                 <div>
-                    <button type="button" class="elem1" id="product" onclick="selected(this, {{id}}, {{price}}, 'total_coffe')">
+                    <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_coffe')">
                         {{product}}
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
-                    <button type="button" class="elem3" id="remove" onclick="deselected(this, {{id}}, {{price}}, 'total_coffe')"></button>
+                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
+                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_coffe');
+                                                                 }">
+                    </button>
                 </div>
 
                 {% endfor %}
 
                 <hr class="separator">
 
-                <div class="total" id="total_coffe">
+                <div class="total">
                     Subtotal $
-                    <label id="total">0</label>
+                    <label id="total_coffe">0</label>
                 </div>
+
+                <h3 class="section_title"> Panaderia </h3>
+
+                {% for id, product, price in bakery%}
+
+                <div>
+                    <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_bakery');">
+                        {{product}}
+                    </button>
+                    <input class="elem2" name="{{id}}" value="0" readonly/>
+                    <button type="button" class="elem3" onclick="if({{id}}.value > 0){
+                                                                    unhighlight(btn_{{id}}); {{id}}.value--; update_bill(sub, {{price}}, 'total_bakery');
+                                                                 }"></button>
+                </div>
+
+                {% endfor %}
+
+                <hr class="separator">
+
+                <div class="total">
+                    Subtotal $
+                    <label id="total_bakery">0</label>
+                </div>
+
             </div>
         </section>
 

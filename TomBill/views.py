@@ -10,7 +10,8 @@ class Index(TemplateView):
     index_template = 'Index.html'
 
     def get(self, request):
-        data = {"sodas": sodas, "bakery": bakery, "coffe": coffe}
+        data = {"double_sodas": double_sodas, "sodas": sodas, 
+                "additions": additions, "bakery": bakery, "coffe": coffe}
         return render(request, self.index_template, data)
 
 @csrf_exempt

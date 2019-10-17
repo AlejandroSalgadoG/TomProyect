@@ -1,11 +1,12 @@
 from datetime import datetime
 
 from django.db import models
+from django.utils.timezone import now
 
 date_format = '%d/%m/%Y-%H:%M:%S'
 
 class Bill(models.Model):
-    date = models.DateField(default=datetime.now())
+    date = models.DateField(default=now)
     total = models.IntegerField(default=0)
 
 class Product(models.Model):
