@@ -5,8 +5,7 @@ from TomBill.products import *
 from TomBill.models import Bill, Product
 
 def register_bill(data):
-    print(data["client"])
-    bill = Bill(date=datetime.now())
+    bill = Bill(date=datetime.now(), name=data["client"])
     bill.save()
 
     d_sodas_products   = get_products(data, double_sodas)
