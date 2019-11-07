@@ -2,7 +2,7 @@ import win32ui
 
 from TomBill.document import Document
 
-def type_document(date, name, products, subtotal, total):
+def type_bill(date, name, products, subtotal, total):
     doc = Document()
     doc.write_title("Babol Soda")
     doc.write_title("Laura Salgado Gómez")
@@ -21,6 +21,16 @@ def type_document(date, name, products, subtotal, total):
     doc.new_line()
     doc.write_total("subtotal", "%d" % subtotal)
     doc.write_total("total", "%d" % total)
+    return doc
+
+def type_order(date, name, products):
+    doc = Document()
+    doc.write_info("Hora: %s" % date.strftime('%I:%M:%S'))
+    doc.write_info("cliente: %s" % name)
+
+    for type_product in products:
+        for product in type_product:
+            doc.write_order(product)
     return doc
 
 def print_document(document):

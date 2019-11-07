@@ -7,7 +7,7 @@ from datetime import datetime
 
 from TomBill.products import *
 from TomBill.functions import get_products, calc_addition_price, register_bill
-from TomBill.printer import type_document, print_document
+from TomBill.printer import type_bill, type_order, print_document
 
 class Index(TemplateView):
     index_template = 'Index.html'
@@ -32,7 +32,9 @@ def save_bill(request):
 
     subtotal, total = register_bill(date, name, products)
 
-    document = type_document(date, name, products, subtotal, total)
-    print_document(document)
+    bill = type_bill(date, name, products, subtotal, total)
+    order = type_order(date, name, products)
+    print_document(bill)
+    print_document(order)
 
     return redirect('/bill/')

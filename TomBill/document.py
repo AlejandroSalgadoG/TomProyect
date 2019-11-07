@@ -89,6 +89,14 @@ class Document:
         self.lines.append(line)
         self.new_line()
 
+    def write_order(self, purchase):
+        product, quantity, price = purchase
+        line = Line(self.n_line)
+        line.left(product)
+        line.right("%d" % quantity)
+        self.lines.append(line)
+        self.new_line()
+
     def new_line(self):
         self.n_line += 1
         
