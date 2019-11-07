@@ -8,6 +8,7 @@ date_format = '%d/%m/%Y-%H:%M:%S'
 class Bill(models.Model):
     date = models.DateField(default=now)
     name = models.CharField(max_length=50)
+    subtotal = models.IntegerField(default=0)
     total = models.IntegerField(default=0)
 
 class Product(models.Model):

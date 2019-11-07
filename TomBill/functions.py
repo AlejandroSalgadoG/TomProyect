@@ -1,29 +1,24 @@
 import pandas as pd
-from datetime import datetime
 
-from TomBill.products import *
 from TomBill.models import Bill, Product
 
-def register_bill(data):
-    bill = Bill(date=datetime.now(), name=data["client"])
+def register_bill(date, name, products):
+    bill = Bill(date=date, name=name)
     bill.save()
 
-    d_sodas_products   = get_products(data, double_sodas)
-    sodas_products     = get_products(data, sodas)
-    bakery_products    = get_products(data, bakery)
-    coffe_products     = get_products(data, coffe)
-    additions_products = get_products(data, additions)
+    d_sodas_prod, sodas_prod, bakery_prod, coffe_prod, additions_prod = products
 
-    additions_products = calc_addition_price(additions_products)
+    subtotal  = register_products(d_sodas_prod, bill)
+    subtotal += register_products(sodas_prod, bill)
+    subtotal += register_products(bakery_prod, bill)
+    subtotal += register_products(coffe_prod, bill)
+    subtotal += register_products(additions_prod, bill)
 
-    total  = register_products(d_sodas_products, bill)
-    total += register_products(sodas_products, bill)
-    total += register_products(bakery_products, bill)
-    total += register_products(coffe_products, bill)
-    total += register_products(additions_products, bill)
-
-    bill.total = total
+    bill.subtotal = subtotal
+    bill.total = subtotal*1.1
     bill.save()
+
+    return subtotal, total
 
 def get_products(data, elements):
     products = []

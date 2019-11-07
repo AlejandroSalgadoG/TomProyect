@@ -127,6 +127,3 @@ def print_document(document):
 
     dc.EndPage()
     dc.EndDoc()
-
-document = type_bill()
-print_document(document)

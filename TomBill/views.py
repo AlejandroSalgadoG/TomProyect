@@ -3,8 +3,11 @@ from django.views.generic import TemplateView
 
 from django.views.decorators.csrf import csrf_exempt
 
+from datetime import datetime
+
 from TomBill.products import *
-from TomBill.functions import register_bill
+from TomBill.functions import get_products, calc_addition_price, register_bill
+from Printer.Test import type_document, print_document
 
 class Index(TemplateView):
     index_template = 'Index.html'
@@ -16,5 +19,20 @@ class Index(TemplateView):
 
 @csrf_exempt
 def save_bill(request):
-    register_bill(request.POST)
+    d_sodas_prod   = get_products(request.POST, double_sodas)
+    sodas_prod     = get_products(request.POST, sodas)
+    bakery_prod    = get_products(request.POST, bakery)
+    coffe_prod     = get_products(request.POST, coffe)
+    additions_prod = get_products(request.POST, additions)
+    additions_products = calc_addition_price(additions_products)
+
+    products = [d_sodas_prod, sodas_prod, bakery_prod, coffe_prod, additions_prod]
+    date = datetime.now()
+    name = request.POST["client"]
+
+    subtotal, total = register_bill(date, name, products)
+
+    document = type_document(date, name, products, subtotal, total)
+    print_document(document)
+
     return redirect('/bill/')
