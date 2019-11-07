@@ -1,6 +1,3 @@
-import win32ui
-from datetime import datetime
-
 line_size = 350
 line_width = 35
 letter_size = 15
@@ -80,8 +77,8 @@ class Document:
         product, quantity, price = purchase
         line = Line(self.n_line)
         line.left(product)
-        line.right(price)
-        line.middle(quantity)
+        line.right("%d" % price)
+        line.middle("%d" % quantity)
         self.lines.append(line)
         self.new_line()
 
@@ -98,32 +95,3 @@ class Document:
     def print_document(self, dc):
         for line in self.lines:
             line.write_line(dc)
-
-def type_bill():
-    doc = Document()
-    doc.write_title("Babol Soda")
-    doc.write_title("Laura Salgado Gómez")
-    doc.write_title("1053793226")
-    doc.write_title("Régimen simplificado")
-    doc.new_line()
-    doc.write_info("Fecha: 27/10/2019")
-    doc.write_info("Hora: 10:00:00")
-    doc.write_info("cliente: Alejandro")
-    doc.new_line()
-    doc.write_purchase(["café", "2", "6000"])
-    doc.write_purchase(["Pastel", "1", "1000"])
-    doc.new_line()
-    doc.write_total("subtotal", "7000")
-    doc.write_total("total", "7700")
-    return doc
-
-def print_document(document):
-    dc = win32ui.CreateDC()
-    dc.CreatePrinterDC()
-    dc.StartDoc("Test.txt")
-    dc.StartPage()
-
-    document.print_document(dc)
-
-    dc.EndPage()
-    dc.EndDoc()

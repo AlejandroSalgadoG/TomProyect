@@ -7,7 +7,7 @@ from datetime import datetime
 
 from TomBill.products import *
 from TomBill.functions import get_products, calc_addition_price, register_bill
-from Printer.Test import type_document, print_document
+from TomBill.printer import type_document, print_document
 
 class Index(TemplateView):
     index_template = 'Index.html'
@@ -24,7 +24,7 @@ def save_bill(request):
     bakery_prod    = get_products(request.POST, bakery)
     coffe_prod     = get_products(request.POST, coffe)
     additions_prod = get_products(request.POST, additions)
-    additions_products = calc_addition_price(additions_products)
+    additions_prod = calc_addition_price(additions_prod)
 
     products = [d_sodas_prod, sodas_prod, bakery_prod, coffe_prod, additions_prod]
     date = datetime.now()

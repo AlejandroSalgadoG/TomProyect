@@ -18,7 +18,7 @@ def register_bill(date, name, products):
     bill.total = subtotal*1.1
     bill.save()
 
-    return subtotal, total
+    return subtotal, subtotal*1.1
 
 def get_products(data, elements):
     products = []
