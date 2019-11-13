@@ -10,7 +10,7 @@ from TomBill.functions import get_products, calc_addition_price, register_bill
 from TomBill.printer import type_bill, type_order, print_document
 
 class Index(TemplateView):
-    index_template = 'Index.html'
+    index_template = 'BillIndex.html'
 
     def get(self, request):
         data = {"double_sodas": double_sodas, "sodas": sodas, 
