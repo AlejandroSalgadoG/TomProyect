@@ -2,7 +2,7 @@ import pandas as pd
 
 from TomBill.models import Bill, Product
 
-def register_bill(date, name, products):
+def register_bill(date, name, products, tip):
     bill = Bill(date=date, name=name)
     bill.save()
 
@@ -15,10 +15,14 @@ def register_bill(date, name, products):
     subtotal += register_products(additions_prod, bill)
 
     bill.subtotal = subtotal
-    bill.total = subtotal*1.1
+    bill.total = subtotal
+
+    if tip:
+        bill.total *= 1.1
+
     bill.save()
 
-    return subtotal, subtotal*1.1
+    return bill.subtotal, bill.total
 
 def get_products(data, elements):
     products = []

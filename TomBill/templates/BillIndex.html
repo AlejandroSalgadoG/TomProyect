@@ -163,10 +163,13 @@
             var price = Math.abs(subtotal-addition_price);
             update_bill(action, price, 'total_additions');
         }
+
+        function uncheck(input){
+            input.checked = false;
+        }
     </script>
 
     <body>
-
         <header>
             <h1>Bienvenido</h1>
         </header>
@@ -177,7 +180,7 @@
             <div class="column">
                 <h3 class="section_title"> Sodas Dobles </h3>
 
-                {% for id, product, price in double_sodas%}
+                {% for id, short_product, product, price in double_sodas%}
 
                 <div>
                     <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_double')">
@@ -201,7 +204,7 @@
 
                 <h3 class="section_title"> Adiciones </h3>
 
-                {% for id, product, price in additions%}
+                {% for id, short_product, product, price in additions%}
 
                 <div>
                     <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; add_addition({{price}})">
@@ -222,13 +225,12 @@
                     Subtotal $
                     <label id="total_additions">0</label>
                 </div>
-
             </div>
 
             <div class="column">
                 <h3 class="section_title"> Sodas </h3>
 
-                {% for id, product, price in sodas%}
+                {% for id, short_product, product, price in sodas%}
 
                 <div>
                     <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_sodas')">
@@ -254,7 +256,7 @@
             <div class="column">
                 <h3 class="section_title"> Café </h3>
 
-                {% for id, product, price in coffe%}
+                {% for id, short_product, product, price in coffe%}
 
                 <div>
                     <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_coffe')">
@@ -278,7 +280,7 @@
 
                 <h3 class="section_title"> Panaderia </h3>
 
-                {% for id, product, price in bakery%}
+                {% for id, short_product, product, price in bakery%}
 
                 <div>
                     <button type="button" class="elem1" name="btn_{{id}}" onclick="highlight(this); {{id}}.value++; update_bill(add, {{price}}, 'total_bakery');">
@@ -303,10 +305,17 @@
                 <div class="separator">
 
                 <div>
+                    <b> Incluir propina </b>
+                    Si <input type="radio" name="tip" checked="checked" onclick="uncheck(no_tip)">
+                    No <input type="radio" name="no_tip" onclick="uncheck(tip)">
+                </div>
+
+                <div class="separator"> </div>
+
+                <div>
                     <b> Cliente </b>
                     <input class="name" name="client" required/>
                 </div>
-
             </div>
         </section>
 
@@ -317,6 +326,5 @@
         </footer>
 
         </form>
-
     </body>
 </html>

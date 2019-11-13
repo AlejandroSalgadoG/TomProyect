@@ -26,11 +26,12 @@ def save_bill(request):
     additions_prod = get_products(request.POST, additions)
     additions_prod = calc_addition_price(additions_prod)
 
-    products = [d_sodas_prod, sodas_prod, bakery_prod, coffe_prod, additions_prod]
     date = datetime.now()
     name = request.POST["client"]
+    products = [d_sodas_prod, sodas_prod, bakery_prod, coffe_prod, additions_prod]
+    tip = "tip" in request.POST
 
-    subtotal, total = register_bill(date, name, products)
+    subtotal, total = register_bill(date, name, products, tip)
 
     bill = type_bill(date, name, products, subtotal, total)
     order = type_order(date, name, products)
