@@ -22,10 +22,10 @@ def register_bill(date, name, products):
 
 def get_products(data, elements):
     products = []
-    for id_name, name, price in elements:
+    for id_name, short_name, name, price in elements:
         quantity = int( data[id_name] )
         if(quantity > 0):
-            products.append([name, quantity, price])
+            products.append([short_name, quantity, price])
     return products
 
 def calc_addition_price(additions_products):
