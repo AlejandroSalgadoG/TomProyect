@@ -188,7 +188,7 @@
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
                     <button type="button" class="elem3" onclick="if({{id}}.value == 0) return;
-                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}}); 
+                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}});
                                                                  {{id}}.value--; update_bill(sub, {{price}}, 'total_double');">
                     </button>
                 </div>
@@ -212,7 +212,7 @@
                     </button>
                     <input class="elem2" name="{{id}}" value="0" readonly/>
                     <button type="button" class="elem3" onclick="if({{id}}.value == 0) return;
-                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}}); 
+                                                                 if({{id}}.value == 1) unhighlight(btn_{{id}});
                                                                  {{id}}.value--; sub_addition({{price}});">
                     </button>
                 </div>
@@ -306,8 +306,8 @@
 
                 <div>
                     <b> Incluir propina </b>
-                    Si <input type="radio" name="tip" checked="checked" onclick="uncheck(no_tip)">
-                    No <input type="radio" name="no_tip" onclick="uncheck(tip)">
+                    Si <input type="radio" name="tip" onclick="uncheck(no_tip)">
+                    No <input type="radio" name="no_tip" checked="checked" onclick="uncheck(tip)">
                 </div>
 
                 <div class="separator"> </div>
