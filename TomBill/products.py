@@ -1,11 +1,14 @@
 double_sodas = [ ("kiwwi_menta", "Kiwwi-menta", "Kiwwi-menta", 7000),
-                 ("limonada_coco", "Limo coco", "Limonada de coco", 7000),
-                 ("menta_marac", "Menta marac", "Menta-maracuyá", 7000),
-                 ("sandia_hierb", "Sandia hierb", "Sandia-hierbabuena", 7000),
+                 ("amar_menta", "Ama menta", "Amarena menta", 7000),
+                 ("marac_coco", "Mara coco", "Maracuyá coco", 7000),
+                 ("fruto_rojo", "Fruto rojos", "Frutos rojos limon habanero", 7000),
+                 ("sandia_pepin", "Sandia pep", "Sandia pepino", 7000),
+                 ("lychee_coco", "Lychee coco", "Lychee coco", 7000),
+                 ("limon_haba", "Limo haban", "Limon habanero y mango", 7000),
                  ("mango_duraz", "Mango dur", "Mango-durazno", 7000),
-                 ("sandia_pepin", "Sandia pep", "Sandia-pepino", 7000),
-                 ("mango_lyme", "Mango lyme", "Mango-lyme habanero", 7000),
-                 ("lychee_menta", "Lychee menta", "Lychee-menta", 7000),
+                 ("sandi_limo", "Sand limi", "Sandia limon habanero", 7000),
+                 ("limonada_coco", "Limo coco", "Limonada de coco", 7000),
+                 ("manzan_limo", "Manzan lim", "Manzana verde y limon habanero", 7000),
                  ("personalized", "Personal", "Personalizada", 7000) ]
 
 sodas = [ ("durazno", "Durazno", "Durazno", 6500),
@@ -21,7 +24,8 @@ sodas = [ ("durazno", "Durazno", "Durazno", 6500),
           ("lyme_haban", "Lyme haban", "Lyme habanero", 6500),
           ("maracuya", "Maracuyá", "Maracuyá", 6500),
           ("amarena", "Amarena", "Amarena", 6500),
-          ("kiwwi", "Kiwwi", "Kiwwi", 6500) ]
+          ("kiwwi", "Kiwwi", "Kiwwi", 6500),
+          ("tradicion", "Tradicion", "Tradicional", 5000) ]
 
 additions = [ ("add_lychee", "Ad Lychee", "Lychee", 800),
               ("add_durazno", "Ad Durazno", "Durazno", 800),
