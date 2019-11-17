@@ -38,8 +38,10 @@ bakery = [ ("palito_queso", "P queso", "Palito de queso", 3000),
            ("pastel_pollo", "P Pollo", "Pastel de pollo", 4500),
            ("pastel_carne", "P Carne", "Pastel carne y cebolla caramelizada", 4500),
            ("pastel_espin", "P espin", "Pastel de espinaca y champiñones", 3600),
-           ("croissant", "Croissant", "Croissant de chocolate", 4500),
+           ("crois_choco", "C choco", "Croissant de chocolate", 4500),
+           ("crois_queso", "C queso", "Croissant de queso", 4000),
            ("muffin_ban", "M banano", "Muffin de banano", 3000),
+           ("muffin_ques", "M queso", "Muffin de queso", 4500),
            ("muffin_man", "M manzana", "Muffin de manzana y nuez", 4000) ]
           
 coffe = [ ("cafe_ameri", "Americ", "Americano", 2500),
