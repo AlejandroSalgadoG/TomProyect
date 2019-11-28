@@ -19,19 +19,20 @@ class Index(TemplateView):
 
 @csrf_exempt
 def save_bill(request):
-    d_sodas_prod   = get_products(request.POST, double_sodas)
-    sodas_prod     = get_products(request.POST, sodas)
-    bakery_prod    = get_products(request.POST, bakery)
-    coffe_prod     = get_products(request.POST, coffe)
-    additions_prod = get_products(request.POST, additions)
-    additions_prod = calc_addition_price(additions_prod)
+    d_sodas_prod, n_d_sodas     = get_products(request.POST, double_sodas)
+    sodas_prod, n_sodas         = get_products(request.POST, sodas)
+    bakery_prod, n_bakery       = get_products(request.POST, bakery)
+    coffe_prod, n_coffe         = get_products(request.POST, coffe)
+    additions_tmp, n_additions = get_products(request.POST, additions)
+    additions_prod = calc_addition_price(additions_tmp, n_d_sodas + n_sodas)
 
     date = datetime.now()
     name = request.POST["client"]
     products = [d_sodas_prod, sodas_prod, bakery_prod, coffe_prod, additions_prod]
     tip = "tip" in request.POST
+    cash = "cash" in request.POST
 
-    subtotal, total = register_bill(date, name, products, tip)
+    subtotal, total = register_bill(date, name, products, tip, cash)
 
     bill = type_bill(date, name, products, subtotal, total)
     order = type_order(date, name, products)
