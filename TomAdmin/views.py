@@ -1,10 +1,13 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from TomBill.models import Bill, Product
+from TomAdmin.functions import get_bills_info
 
 class Index(TemplateView):
     index_template = 'AdminIndex.html'
 
     def get(self, request):
-        return render(request, self.index_template, {})
+        bills = get_bills_info()
+        data = {"bills": bills}
+
+        return render(request, self.index_template, data)

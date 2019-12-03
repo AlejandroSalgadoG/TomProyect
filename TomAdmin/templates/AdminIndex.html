@@ -2,59 +2,115 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <style>
-        .accordion {
-          background-color: #eee;
-          padding: 18px;
-          width: 100%;
-          border: none;
-          text-align: left;
-          outline: none;
-          font-size: 15px;
-        }
-        
-        .active, .accordion {
-          background-color: #ccc; 
-        }
-        
-        .panel {
-          padding: 0 18px;
-          display: none;
-          background-color: white;
-        }
 
-        .box {
-          width: 100%;
-          height: 500px;
-          overflow: scroll;
-        }
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            header {
+              background-color: #666;
+              padding: 1px;
+              text-align: center;
+              font-size: 12px;
+              color: white;
+            }
+
+            .accordion {
+              background-color: #ea1d76;
+              color: white;
+              padding: 8px;
+              width: 100%;
+              text-align: center;
+              outline: none;
+              font-size: 15px;
+              border-radius: 10px;
+              border: 2px solid #666;
+            }
+
+            .active {
+              background-color: #ccc;
+            }
+
+            .panel {
+              padding: 0 18px;
+              display: none;
+              background-color: white;
+            }
+
+            .box {
+              width: 100%;
+              height: 500px;
+              overflow: scroll;
+            }
+
+            .tab {
+              overflow: hidden;
+              background-color: #00c4b3;
+            }
+            
+            .tab button {
+              background-color: inherit;
+              color: white;
+              float: left;
+              border: none;
+              outline: none;
+              padding: 14px 16px;
+              font-size: 17px;
+            }
+            
+            .tab button:hover {
+              background-color: #ddd;
+            }
+            
+            .tabcontent {
+              display: none;
+              border: none;
+            }   
         </style>
     </head>
-    
-    <body>
-        <h2> Hola </h2>
 
-        <div class="box">
-            <button class="accordion">Section 1</button>
-            <div class="panel">
-              <p>item 1</p>
-            </div>
-            
-            <button class="accordion">Section 2</button>
-            <div class="panel">
-              <p>item 2</p>
-              <p>item 3</p>
-            </div>
-            
-            <button class="accordion">Section 3</button>
-            <div class="panel">
-              <p>item 4</p>
-            </div>
+    <body>
+        <header>
+            <h1>Administración</h1>
+        </header>
+
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Facturas')">Facturas</button>
+          <button class="tablinks" onclick="openTab(event, 'Productos')">Productos</button>
+          <button class="tablinks" onclick="openTab(event, 'Inventario')">Inventario</button>
+        </div>
+        
+        <!--div class="box"-->
+        <div id="Facturas" class="tabcontent">
+            {% for bill, products in bills %}
+                <button class="accordion">Factura {{bill.id}}</button>
+                <div class="panel">
+                    {% for product in products %}
+                        <p> {{product.name}} </p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="Productos" class="tabcontent">
+          <h3>Productos</h3>
+        </div>
+
+        <div id="Inventario" class="tabcontent">
+          <h3>Inventario</h3>
         </div>
     </body>
 
     <script>
+        function openTab(evt, tab_name) {
+          var tabcontent = document.getElementsByClassName("tabcontent");
+          for (var i=0; i<tabcontent.length; i++) tabcontent[i].style.display = "none";
+          document.getElementById(tab_name).style.display = "block";
+        }
+
         function accordion() {
             var panel = this.nextElementSibling;
             if (panel.style.display === "block") panel.style.display = "none";
