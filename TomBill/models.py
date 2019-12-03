@@ -6,7 +6,7 @@ from django.utils.timezone import now
 date_format = '%d/%m/%Y-%H:%M:%S'
 
 class Bill(models.Model):
-    date = models.DateField(default=now)
+    date = models.DateTimeField(default=now)
     name = models.CharField(max_length=50)
     cash = models.BooleanField(default=True)
     subtotal = models.IntegerField(default=0)
