@@ -78,15 +78,21 @@
         </header>
 
         <div class="tab">
-          <button class="tablinks" onclick="openTab(event, 'Facturas')">Facturas</button>
+          <button id="default_tab" class="tablinks" onclick="openTab(event, 'Facturas')">Facturas</button>
           <button class="tablinks" onclick="openTab(event, 'Productos')">Productos</button>
           <button class="tablinks" onclick="openTab(event, 'Inventario')">Inventario</button>
         </div>
-        
+
         <!--div class="box"-->
         <div id="Facturas" class="tabcontent">
+
+            <form action="/admn" method=get>
+                <input type="date" name="date_from" required> <input type="date" name="date_to">
+                <input type="submit">
+            </form>
+            
             {% for bill, products in bills %}
-                <button class="accordion">Factura {{bill.id}}</button>
+                <button class="accordion">{{bill.date}}</button>
                 <div class="panel">
                     {% for product in products %}
                         <p> {{product.name}} </p>
@@ -116,6 +122,8 @@
             if (panel.style.display === "block") panel.style.display = "none";
             else panel.style.display = "block";
         }
+
+        document.getElementById("default_tab").click();
 
         var acc = document.getElementsByClassName("accordion");
         for(var i=0;i<acc.length;i++) acc[i].addEventListener("click", accordion);
