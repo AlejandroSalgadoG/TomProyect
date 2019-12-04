@@ -41,6 +41,19 @@
               background-color: #ddd;
             }
 
+            .separator {
+                border-bottom: 3px solid white;
+                border-left: white;
+                border-right: white;
+                padding: 5px;
+            }
+
+            input{
+                padding: 8px;
+                border-radius: 10px;
+                border: 2px solid #ea1d76;
+            }
+
         </style>
     </head>
 
@@ -55,5 +68,15 @@
           <button class="tablinks" onclick="location.href='/admn/products'">Productos</button>
           <button class="tablinks" onclick="location.href='/admn/inventary'">Inventario</button>
         </div>
+
+        <div class="separator"> </div>
+
+        <form action="/admn/accounting" method=get>
+            Base <input type="text" name="base" required>
+            <input type="submit" style="background-color: white;">
+        </form>
+
+        <div class="separator"> </div>
     <body>
+
 </html>

@@ -1,3 +1,6 @@
 from django.db import models
+from django.utils.timezone import now
 
-# Create your models here.
+class Base(models.Model):
+    date = models.DateTimeField(default=now)
+    value = models.IntegerField(default=0)

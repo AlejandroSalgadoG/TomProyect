@@ -1,3 +1,4 @@
 from django.contrib import admin
+from TomAdmin.models import Base
 
-# Register your models here.
+admin.site.register(Base)
