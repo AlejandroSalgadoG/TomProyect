@@ -54,6 +54,19 @@
                 border: 2px solid #ea1d76;
             }
 
+            table {
+              border-collapse: collapse;
+              width: 20%;
+            }
+
+            td, th {
+              text-align: left;
+              padding: 5px;
+            }
+
+            tr:nth-child(odd) {
+              background-color: #babf10;
+            }
         </style>
     </head>
 
@@ -71,12 +84,35 @@
 
         <div class="separator"> </div>
 
-        <form action="/admn/accounting" method=get>
+        <form action="/admn/accounting" method=post>
             Base <input type="text" name="base" required>
             <input type="submit" style="background-color: white;">
         </form>
 
         <div class="separator"> </div>
-    <body>
 
+        <form action="/admn/accounting" method=get>
+            <input type="date" name="date_from" required> <input type="date" name="date_to">
+            <input type="submit" style="background-color: white;">
+        </form>
+
+        <div class="separator"> </div>
+
+        <div class="panel">
+            <table>
+                <tr>
+                    <td>Numero de facturas</td> <td>{{n_bills}}</td>
+                </tr>
+                <tr>
+                    <td>Total de ventas</td> <td>{{total}}</td>
+                </tr>
+                <tr>
+                    <td>Total pagado en efectivo</td> <td>{{cash}}</td>
+                </tr>
+                <tr>
+                    <td>Total propinas</td> <td>{{tips}}</td>
+                </tr>
+            </table>
+        </div>
+    <body>
 </html>

@@ -15,6 +15,25 @@ class Accounting(TemplateView):
     template = 'Accounting.html'
 
     def get(self, request):
+        date_from, date_to = None, None
+
+        if "date_from" in request.GET and request.GET["date_from"] != "":
+            date_from = datetime.strptime(request.GET["date_from"], "%Y-%m-%d")
+
+
+        if "date_to" in request.GET and request.GET["date_to"] != "":
+            date_to = datetime.strptime(request.GET["date_to"], "%Y-%m-%d")
+
+        bills, n_bills, total, cash, tips, = get_bills_info(date_from, date_to)
+
+        data = {"n_bills": n_bills,
+                "total": total,
+                "cash": cash,
+                "tips": tips}
+
+        return render(request, self.template, data)
+
+    def post(self, request):
         return render(request, self.template, {})
 
 class Records(TemplateView):
@@ -30,7 +49,9 @@ class Records(TemplateView):
         if "date_to" in request.GET and request.GET["date_to"] != "":
             date_to = datetime.strptime(request.GET["date_to"], "%Y-%m-%d")
 
-        return render(request, self.template, {"bills": get_bills_info(date_from, date_to)})
+        bills, _, _, _, _ = get_bills_info(date_from, date_to)
+
+        return render(request, self.template, {"bills": bills})
 
 class Products(TemplateView):
     template = 'Products.html'
