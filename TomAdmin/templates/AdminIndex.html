@@ -10,6 +10,10 @@
                 padding: 0;
             }
 
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
             header {
               background-color: #666;
               padding: 1px;
@@ -50,7 +54,7 @@
               overflow: hidden;
               background-color: #00c4b3;
             }
-            
+
             .tab button {
               background-color: inherit;
               color: white;
@@ -60,15 +64,42 @@
               padding: 14px 16px;
               font-size: 17px;
             }
-            
+
             .tab button:hover {
               background-color: #ddd;
             }
-            
+
             .tabcontent {
               display: none;
               border: none;
-            }   
+            }
+
+            .separator {
+                border-bottom: 3px solid white;
+                border-left: white;
+                border-right: white;
+                padding: 5px;
+            }
+
+            input{
+                padding: 8px;
+                border-radius: 10px;
+                border: 2px solid #ea1d76;
+            }
+
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+
+            td, th {
+              text-align: left;
+              padding: 5px;
+            }
+
+            tr:nth-child(odd) {
+              background-color: #babf10;
+            }
         </style>
     </head>
 
@@ -83,20 +114,30 @@
           <button class="tablinks" onclick="openTab(event, 'Inventario')">Inventario</button>
         </div>
 
-        <!--div class="box"-->
         <div id="Facturas" class="tabcontent">
+
+            <div class="separator"> </div>
 
             <form action="/admn" method=get>
                 <input type="date" name="date_from" required> <input type="date" name="date_to">
-                <input type="submit">
+                <input type="submit" style="background-color: white;">
             </form>
-            
+
+            <div class="separator"> </div>
+
             {% for bill, products in bills %}
                 <button class="accordion">{{bill.date}}</button>
                 <div class="panel">
-                    {% for product in products %}
-                        <p> {{product.name}} </p>
-                    {% endfor %}
+                    <table>
+                        <tr>
+                            <th>Productos</th> <th>Cantidad</th> <th>Precio</th>
+                        </tr>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{product.name}}</td> <td>{{product.quantity}}</td> <td>{{product.price}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             {% endfor %}
         </div>
