@@ -74,9 +74,9 @@ class Document:
         self.new_line()
 
     def write_purchase(self, purchase):
-        product, quantity, price = purchase
+        short, name, quantity, price = purchase
         line = Line(self.n_line)
-        line.left(product)
+        line.left(short)
         line.right("%d" % price)
         line.middle("%d" % quantity)
         self.lines.append(line)
@@ -90,9 +90,9 @@ class Document:
         self.new_line()
 
     def write_order(self, purchase):
-        product, quantity, price = purchase
+        short, name, quantity, price = purchase
         line = Line(self.n_line)
-        line.left(product)
+        line.left(short)
         line.right("%d" % quantity)
         self.lines.append(line)
         self.new_line()

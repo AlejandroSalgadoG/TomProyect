@@ -27,16 +27,16 @@ sodas = [ ("durazno", "Durazno", "Durazno", 6500),
           ("kiwwi", "Kiwwi", "Kiwwi", 6500),
           ("tradicion", "Tradicion", "Tradicional", 5000) ]
 
-additions = [ ("add_lychee", "Ad Lychee", "Lychee", 800),
-              ("add_durazno", "Ad Durazno", "Durazno", 800),
-              ("add_mix_fruto", "Ad Mix frutos", "Mix frutos rojos", 800),
-              ("add_mango", "Ad Mango", "Mango", 500),
-              ("add_fresa", "Ad Fresa", "Fresa", 500),
-              ("add_maracuya", "Ad Maracuyá", "Maracuyá", 500),
-              ("add_coco", "Ad Coco", "Coco", 500),
-              ("add_cereza", "Ad Cereza", "Cereza", 500),
-              ("add_explosion", "Ad Explosión", "Explosión", 800),
-              ("add_jelly_arco", "Ad Jelly", "jelly arcoiris", 800) ]
+additions = [ ("add_lychee", "Ad Lychee", "Adición lychee", 800),
+              ("add_durazno", "Ad Durazno", "Adición durazno", 800),
+              ("add_mix_fruto", "Ad Mix frutos", "Adición mix frutos rojos", 800),
+              ("add_mango", "Ad Mango", "Adición mango", 500),
+              ("add_fresa", "Ad Fresa", "Adición fresa", 500),
+              ("add_maracuya", "Ad Maracuyá", "Adición maracuyá", 500),
+              ("add_coco", "Ad Coco", "Adición coco", 500),
+              ("add_cereza", "Ad Cereza", "Adición cereza", 500),
+              ("add_explosion", "Ad Explosión", "Adición explosión", 800),
+              ("add_jelly_arco", "Ad Jelly", "Adición jelly arcoiris", 800) ]
 
 bakery = [ ("palito_queso", "P queso", "Palito de queso", 3000),
            ("pastel_pollo", "P Pollo", "Pastel de pollo", 4500),

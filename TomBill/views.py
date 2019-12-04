@@ -36,7 +36,7 @@ def save_bill(request):
 
     bill = type_bill(date, name, products, subtotal, total)
     order = type_order(date, name, products)
-    print_document(bill)
-    print_document(order)
+    #print_document(bill)
+    #print_document(order)
 
     return redirect('/bill/')

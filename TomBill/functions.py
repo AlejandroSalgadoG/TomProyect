@@ -31,7 +31,7 @@ def get_products(data, elements):
         quantity = int( data[id_name] )
         if(quantity > 0):
             n_products += quantity
-            products.append([short_name, quantity, price])
+            products.append([short_name, name, quantity, price])
     return products, n_products
 
 def calc_addition_price(additions_products, n_sodas):
@@ -56,7 +56,7 @@ def register_products(products, bill):
     if len(products) == 0:
         return subtotal
 
-    for name, quantity, price in products:
+    for short, name, quantity, price in products:
         product = Product(name=name, price=price, quantity=quantity, bill=bill)
         product.save()
         subtotal += price * quantity 
