@@ -1,58 +1,72 @@
-double_sodas = [ ("kiwwi_menta", "Kiwwi-menta", "Kiwwi-menta", 7000),
-                 ("amar_menta", "Ama menta", "Amarena menta", 7000),
-                 ("marac_coco", "Mara coco", "Maracuyá coco", 7000),
-                 ("fruto_rojo", "Fruto rojos", "Frutos rojos limon habanero", 7000),
-                 ("sandia_pepin", "Sandia pep", "Sandia pepino", 7000),
-                 ("lychee_coco", "Lychee coco", "Lychee coco", 7000),
-                 ("limon_haba", "Limo haban", "Limon habanero y mango", 7000),
-                 ("mango_duraz", "Mango dur", "Mango-durazno", 7000),
-                 ("sandi_limo", "Sand limi", "Sandia limon habanero", 7000),
-                 ("limonada_coco", "Limo coco", "Limonada de coco", 7000),
-                 ("manzan_limo", "Manzan lim", "Manzana verde y limon habanero", 7000),
-                 ("personalized", "Personal", "Personalizada", 7000) ]
+from TomBill.models import Section, Product
 
-sodas = [ ("durazno", "Durazno", "Durazno", 6500),
-          ("pepino", "Pepino", "Pepino", 6500),
-          ("manzana_verde", "Manzana", "Manzana verde", 6500),
-          ("coco", "Coco", "Coco", 6500),
-          ("mango", "Mango", "Mango", 6500),
-          ("fresa", "Fresa", "Fresa", 6500),
-          ("sandia", "Sandia", "Sandia", 6500),
-          ("mora_azul", "Mora azul", "Mora azul", 6500),
-          ("menta", "Menta", "Menta", 6500),
-          ("lychee", "Lychee", "Lychee", 6500),
-          ("lyme_haban", "Lyme haban", "Lyme habanero", 6500),
-          ("maracuya", "Maracuyá", "Maracuyá", 6500),
-          ("amarena", "Amarena", "Amarena", 6500),
-          ("kiwwi", "Kiwwi", "Kiwwi", 6500),
-          ("tradicion", "Tradicion", "Tradicional", 5000) ]
+d_soda = Section(name="Sodas Dobles")
+soda = Section(name="Sodas")
+addition = Section(name="Adiciones")
+bakery = Section(name="Panaderia")
+coffe = Section(name="Cafe")
 
-additions = [ ("add_lychee", "Ad Lychee", "Adición lychee", 800),
-              ("add_durazno", "Ad Durazno", "Adición durazno", 800),
-              ("add_mix_fruto", "Ad Mix frutos", "Adición mix frutos rojos", 800),
-              ("add_mango", "Ad Mango", "Adición mango", 500),
-              ("add_fresa", "Ad Fresa", "Adición fresa", 500),
-              ("add_maracuya", "Ad Maracuyá", "Adición maracuyá", 500),
-              ("add_coco", "Ad Coco", "Adición coco", 500),
-              ("add_cereza", "Ad Cereza", "Adición cereza", 500),
-              ("add_explosion", "Ad Explosión", "Adición explosión", 800),
-              ("add_jelly_arco", "Ad Jelly", "Adición jelly arcoiris", 800) ]
+d_soda.save()
+soda.save()
+addition.save()
+bakery.save()
+coffe.save()
 
-bakery = [ ("palito_queso", "P queso", "Palito de queso", 3000),
-           ("pastel_pollo", "P Pollo", "Pastel de pollo", 4500),
-           ("pastel_carne", "P Carne", "Pastel carne y cebolla caramelizada", 4500),
-           ("pastel_espin", "P espin", "Pastel de espinaca y champiñones", 4500),
-           ("crois_choco", "C choco", "Croissant de chocolate", 4500),
-           ("crois_queso", "C queso", "Croissant de queso", 4000),
-           ("muffin_ban", "M banano", "Muffin de banano", 3000),
-           ("muffin_ques", "M queso", "Muffin de queso", 4500),
-           ("muffin_man", "M manzana", "Muffin de manzana y nuez", 4000) ]
-          
-coffe = [ ("cafe_ameri", "Americ", "Americano", 2500),
-          ("expresso", "Expres", "Expresso", 3500),
-          ("mochaccino", "Moch", "Mochaccino", 5000),
-          ("capuchino", "Capuc", "Capuchino", 5000),
-          ("chocolate", "Choco", "Chocolate", 3500),
-          ("chocolate_lec", "Choco leche", "chocolate en leche", 4500),
-          ("aromatica_lec", "Aro leche", "Aromatica en leche", 4000),
-          ("aromatica_agu", "Aro agua", "Aromatica en agua", 3000) ]
+Product(section=d_soda, html="kiwwi_menta",   short="Kiwwi-menta", name="Kiwwi-menta",                    price=7000).save() 
+Product(section=d_soda, html="amar_menta",    short="Ama menta",   name="Amarena menta",                  price=7000).save()
+Product(section=d_soda, html="marac_coco",    short="Mara coco",   name="Maracuya coco",                  price=7000).save()
+Product(section=d_soda, html="fruto_rojo",    short="Fruto rojos", name="Frutos rojos limon habanero",    price=7000).save()
+Product(section=d_soda, html="sandia_pepin",  short="Sandia pep",  name="Sandia pepino",                  price=7000).save()
+Product(section=d_soda, html="lychee_coco",   short="Lychee coco", name="Lychee coco",                    price=7000).save()
+Product(section=d_soda, html="limon_haba",    short="Limo haban",  name="Limon habanero y mango",         price=7000).save()
+Product(section=d_soda, html="mango_duraz",   short="Mango dur",   name="Mango-durazno",                  price=7000).save()
+Product(section=d_soda, html="sandi_limo",    short="Sand limi",   name="Sandia limon habanero",          price=7000).save()
+Product(section=d_soda, html="limonada_coco", short="Limo coco",   name="Limonada de coco",               price=7000).save()
+Product(section=d_soda, html="manzan_limo",   short="Manzan lim",  name="Manzana verde y limon habanero", price=7000).save()
+Product(section=d_soda, html="personalized",  short="Personal",    name="Personalizada",                  price=7000).save() 
+
+Product(section=soda, html="durazno",       short="Durazno",    name="Durazno",       price=6500).save()
+Product(section=soda, html="pepino",        short="Pepino",     name="Pepino",        price=6500).save()
+Product(section=soda, html="manzana_verde", short="Manzana",    name="Manzana verde", price=6500).save()
+Product(section=soda, html="coco",          short="Coco",       name="Coco",          price=6500).save()
+Product(section=soda, html="mango",         short="Mango",      name="Mango",         price=6500).save()
+Product(section=soda, html="fresa",         short="Fresa",      name="Fresa",         price=6500).save()
+Product(section=soda, html="sandia",        short="Sandia",     name="Sandia",        price=6500).save()
+Product(section=soda, html="mora_azul",     short="Mora azul",  name="Mora azul",     price=6500).save()
+Product(section=soda, html="menta",         short="Menta",      name="Menta",         price=6500).save()
+Product(section=soda, html="lychee",        short="Lychee",     name="Lychee",        price=6500).save()
+Product(section=soda, html="lyme_haban",    short="Lyme haban", name="Lyme habanero", price=6500).save()
+Product(section=soda, html="maracuya",      short="Maracuya",   name="Maracuya",      price=6500).save()
+Product(section=soda, html="amarena",       short="Amarena",    name="Amarena",       price=6500).save()
+Product(section=soda, html="kiwwi",         short="Kiwwi",      name="Kiwwi",         price=6500).save()
+Product(section=soda, html="tradicion",     short="Tradicion",  name="Tradicional",   price=5000).save()
+
+Product(section=addition, html="add_lychee",     short="Ad Lychee",     name="Adicion lychee",           price=800).save()
+Product(section=addition, html="add_durazno",    short="Ad Durazno",    name="Adicion durazno",          price=800).save()
+Product(section=addition, html="add_mix_fruto",  short="Ad Mix frutos", name="Adicion mix frutos rojos", price=800).save()
+Product(section=addition, html="add_mango",      short="Ad Mango",      name="Adicion mango",            price=500).save()
+Product(section=addition, html="add_fresa",      short="Ad Fresa",      name="Adicion fresa",            price=500).save()
+Product(section=addition, html="add_maracuya",   short="Ad Maracuya",   name="Adicion maracuya",         price=500).save()
+Product(section=addition, html="add_coco",       short="Ad Coco",       name="Adicion coco",             price=500).save()
+Product(section=addition, html="add_cereza",     short="Ad Cereza",     name="Adicion cereza",           price=500).save()
+Product(section=addition, html="add_explosion",  short="Ad Explosion",  name="Adicion explosion",        price=800).save()
+Product(section=addition, html="add_jelly_arco", short="Ad Jelly",      name="Adicion jelly arcoiris",   price=800).save()
+
+Product(section=bakery, html="palito_queso", short="P queso",   name="Palito de queso",                     price=3000).save()
+Product(section=bakery, html="pastel_pollo", short="P Pollo",   name="Pastel de pollo",                     price=4500).save()
+Product(section=bakery, html="pastel_carne", short="P Carne",   name="Pastel carne y cebolla caramelizada", price=4500).save()
+Product(section=bakery, html="pastel_espin", short="P espin",   name="Pastel de espinaca y champinones",    price=4500).save()
+Product(section=bakery, html="crois_choco",  short="C choco",   name="Croissant de chocolate",              price=4500).save()
+Product(section=bakery, html="crois_queso",  short="C queso",   name="Croissant de queso",                  price=4000).save()
+Product(section=bakery, html="muffin_ban",   short="M banano",  name="Muffin de banano",                    price=3000).save()
+Product(section=bakery, html="muffin_ques",  short="M queso",   name="Muffin de queso",                     price=4500).save()
+Product(section=bakery, html="muffin_man",   short="M manzana", name="Muffin de manzana y nuez",            price=4000).save()
+
+Product(section=coffe, html="cafe_ameri",    short="Americ",      name="Americano",          price=2500).save()
+Product(section=coffe, html="expresso",      short="Expres",      name="Expresso",           price=3500).save()
+Product(section=coffe, html="mochaccino",    short="Moch",        name="Mochaccino",         price=5000).save()
+Product(section=coffe, html="capuchino",     short="Capuc",       name="Capuchino",          price=5000).save()
+Product(section=coffe, html="chocolate",     short="Choco",       name="Chocolate",          price=3500).save()
+Product(section=coffe, html="chocolate_lec", short="Choco leche", name="chocolate en leche", price=4500).save()
+Product(section=coffe, html="aromatica_lec", short="Aro leche",   name="Aromatica en leche", price=4000).save()
+Product(section=coffe, html="aromatica_agu", short="Aro agua",    name="Aromatica en agua",  price=3000).save()
