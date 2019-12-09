@@ -20,7 +20,6 @@ class Accounting(TemplateView):
         if "date_from" in request.GET and request.GET["date_from"] != "":
             date_from = datetime.strptime(request.GET["date_from"], "%Y-%m-%d")
 
-
         if "date_to" in request.GET and request.GET["date_to"] != "":
             date_to = datetime.strptime(request.GET["date_to"], "%Y-%m-%d")
 

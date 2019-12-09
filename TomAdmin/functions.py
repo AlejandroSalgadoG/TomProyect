@@ -1,6 +1,6 @@
 from django.utils.timezone import now
 
-from TomBill.models import Bill, Product
+from TomBill.models import Bill, Purchase
 
 def get_bills_info(date_from, date_to):
     bills = []
@@ -21,6 +21,6 @@ def get_bills_info(date_from, date_to):
         if bill.cash:
             cash += bill.total
 
-        bills.append([bill, bill.product_set.all()])
+        bills.append([bill, bill.purchase_set.all()])
 
     return bills, len(bills), total, cash, tips

@@ -109,16 +109,22 @@
 
             <div class="separator"> </div>
 
-            {% for bill, products in bills %}
+            {% for bill, purchases in bills %}
                 <button class="accordion">{{bill.date}}</button>
                 <div class="panel">
                     <table>
                         <tr>
                             <th>Productos</th> <th>Cantidad</th> <th>Precio</th>
                         </tr>
-                        {% for product in products %}
+                        {% for purchase in purchases %}
                             <tr>
-                                <td>{{product.name}}</td> <td>{{product.quantity}}</td> <td>{{product.price}}</td>
+                                <td>{{purchase.product.name}}</td>
+                                <td>{{purchase.quantity}}</td> 
+                                {% if purchase.free %}
+                                    <td>0</td>
+                                {% else %}
+                                    <td>{{purchase.product.price}}</td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                     </table>
