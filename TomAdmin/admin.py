@@ -1,4 +1,4 @@
 from django.contrib import admin
-from TomAdmin.models import Base
+from TomAdmin.models import Expense
 
-admin.site.register(Base)
+admin.site.register(Expense)

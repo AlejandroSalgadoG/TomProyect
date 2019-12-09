@@ -42,10 +42,10 @@
             }
 
             .separator {
-                border-bottom: 3px solid white;
+                border-bottom: 5px solid white;
                 border-left: white;
                 border-right: white;
-                padding: 5px;
+                padding: 10px;
             }
 
             input{
@@ -56,7 +56,7 @@
 
             table {
               border-collapse: collapse;
-              width: 20%;
+              width: 100%;
             }
 
             td, th {
@@ -66,6 +66,12 @@
 
             tr:nth-child(odd) {
               background-color: #babf10;
+            }
+
+            .column{
+                float: left;
+                width: 50%;
+                padding: 10px;
             }
         </style>
     </head>
@@ -78,16 +84,10 @@
         <div class="tab">
           <button class="tablinks" onclick="location.href='/admn/accounting'">Contabilidad</button>
           <button class="tablinks" onclick="location.href='/admn/records'">Facturas</button>
+          <button class="tablinks" onclick="location.href='/admn/expenses'">Gastos</button>
           <button class="tablinks" onclick="location.href='/admn/products'">Productos</button>
           <button class="tablinks" onclick="location.href='/admn/inventary'">Inventario</button>
         </div>
-
-        <div class="separator"> </div>
-
-        <form action="/admn/accounting" method=post>
-            Base <input type="text" name="base" required>
-            <input type="submit" style="background-color: white;">
-        </form>
 
         <div class="separator"> </div>
 
@@ -98,8 +98,11 @@
 
         <div class="separator"> </div>
 
-        <div class="panel">
+        <div class="column">
             <table>
+                <tr>
+                    <th>Ingresos</th> <th>Total</th> 
+                </tr>
                 <tr>
                     <td>Numero de facturas</td> <td>{{n_bills}}</td>
                 </tr>
@@ -111,6 +114,19 @@
                 </tr>
                 <tr>
                     <td>Total propinas</td> <td>{{tips}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="separator"> </div>
+
+        <div class="column">
+            <table>
+                <tr>
+                    <th>Egresos</th> <th>Total</th> 
+                </tr>
+                <tr>
+                    <td>Numero de gastos</td> <td>0</td>
                 </tr>
             </table>
         </div>

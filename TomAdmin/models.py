@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.timezone import now
 
-class Base(models.Model):
+class Expense(models.Model):
     date = models.DateTimeField(default=now)
-    value = models.IntegerField(default=0)
+    description = models.CharField(max_length=100)
+    price = models.IntegerField(default=0)
+    cash = models.BooleanField(default=True)

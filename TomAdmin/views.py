@@ -52,6 +52,12 @@ class Records(TemplateView):
 
         return render(request, self.template, {"bills": bills})
 
+class Expenses(TemplateView):
+    template = 'Expenses.html'
+
+    def get(self, request):
+        return render(request, self.template, {})
+
 class Products(TemplateView):
     template = 'Products.html'
 
