@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from TomAdmin.functions import get_bills_info
+from TomBill.functions import get_db_products
 
 class Index(TemplateView):
     template = 'AdminIndex.html'
@@ -62,7 +63,12 @@ class Products(TemplateView):
     template = 'Products.html'
 
     def get(self, request):
-        return render(request, self.template, {})
+        double_sodas, sodas, additions, bakery, coffe = get_db_products()
+
+        data = {"double_sodas": double_sodas, "sodas": sodas, 
+                "additions": additions, "bakery": bakery, "coffe": coffe}
+
+        return render(request, self.template, data)
 
 class Inventary(TemplateView):
     template = 'Inventary.html'

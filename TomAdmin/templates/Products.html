@@ -41,6 +41,82 @@
               background-color: #ddd;
             }
 
+            .section_title{
+                color: black;
+                font-size: 20px;
+                text-align: center;
+            }
+
+            .column {
+                float: left;
+                width: 33.33%;
+                padding: 10px;
+            }
+
+            .total{
+                color: black;
+                font-size: 17px;
+                text-align: right;
+            }
+
+            .elem1{
+                float: left;
+                width: 60%;
+                padding: 5px;
+                text-align: left;
+            }
+
+            .elem2{
+                float: left;
+                width: 20%;
+                padding: 5px;
+            }
+
+            .elem3{
+                float: left;
+                width: 10%;
+                padding: 5px;
+            }
+
+            .elem4{
+                float: left;
+                width: 10%;
+                padding: 12px;
+                background-color: #ea1d76;
+            }
+
+            .add_button{
+                height: 38px;
+                width: 100%;
+                background-color: #babf10;
+            }
+
+            .name{
+                padding: 8px;
+                width: 100%;
+                border-radius: 10px;
+                border: 2px solid #d83131;
+            }
+
+            .separator {
+                border-bottom: 3px solid white;
+                border-left: white;
+                border-right: white;
+                padding: 5px;
+            }
+
+            .submit_button{
+                height: 38px;
+                width: 100%;
+                background-color: #00c4b3;
+                color: white;
+            }
+
+            @media screen and (max-width: 825px) {
+              .column {
+                width: 100%;
+              }
+            }
         </style>
     </head>
 
@@ -56,5 +132,100 @@
           <button class="tablinks" onclick="location.href='/admn/products'">Productos</button>
           <button class="tablinks" onclick="location.href='/admn/inventary'">Inventario</button>
         </div>
+
+        <form method="post">
+
+        <section>
+            <div class="column">
+                <h3 class="section_title"> Sodas Dobles </h3>
+
+                {% for product in double_sodas%}
+
+                <div>
+                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
+                    <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
+                    <button type="button" class="elem4"/>
+                </div>
+
+                {% endfor %}
+
+                <button type="button" class="add_button"/> Agregar producto </button>
+
+                <hr class="separator">
+
+                <h3 class="section_title"> Adiciones </h3>
+
+                {% for product in additions%}
+
+                <div>
+                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
+                    <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
+                    <button type="button" class="elem4"/>
+                </div>
+
+                {% endfor %}
+
+                <button type="button" class="add_button"/> Agregar producto </button>
+            </div>
+
+            <div class="column">
+                <h3 class="section_title"> Sodas </h3>
+
+                {% for product in sodas%}
+
+                <div>
+                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
+                    <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
+                    <button type="button" class="elem4"/>
+                </div>
+
+                {% endfor %}
+
+                <button type="button" class="add_button"/> Agregar producto </button>
+            </div>
+
+            <div class="column">
+                <h3 class="section_title"> Café </h3>
+
+                {% for product in coffe%}
+
+                <div>
+                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
+                    <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
+                    <button type="button" class="elem4"/>
+                </div>
+
+                {% endfor %}
+
+                <button type="button" class="add_button"/> Agregar producto </button>
+
+                <hr class="separator">
+
+                <h3 class="section_title"> Panaderia </h3>
+
+                {% for product in bakery%}
+
+                <div>
+                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
+                    <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
+                    <button type="button" class="elem4"/>
+                </div>
+
+                {% endfor %}
+
+                <button type="button" class="add_button"/> Agregar producto </button>
+            </div>
+        </section>
+
+        <footer>
+            <button type="submit" class="submit_button" formaction="/admn/update_products/"> actualizar </button>
+        </footer>
+
+        </form>
     <body>
 </html>
