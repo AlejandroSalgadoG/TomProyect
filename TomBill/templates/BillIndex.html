@@ -15,7 +15,7 @@
             }
 
             header {
-                background-color: #666;
+                background-color: #00c4b3;
                 padding: 5px;
                 text-align: center;
                 font-size: 12px;
@@ -29,7 +29,7 @@
             }
 
             footer {
-                background-color: #777;
+                background-color: #00c4b3;
                 text-align: center;
                 color: white;
                 height: 41px;
@@ -50,7 +50,7 @@
                 float: right;
                 padding: 12px 28px;
                 display: inline-block;
-                background-color: #b22222;
+                background-color: #ea1d76;
                 margin-right: 10px;
                 color: white;
             }
@@ -90,14 +90,14 @@
                 float: left;
                 width: 10%;
                 padding: 12px;
-                background-color: #d83131;
+                background-color: #ea1d76;
             }
 
             .name{
                 padding: 8px;
                 width: 100%;
                 border-radius: 10px;
-                border: 2px solid #d83131;
+                border: 2px solid #ea1d76;
             }
 
             .separator {
@@ -105,6 +105,10 @@
                 border-left: white;
                 border-right: white;
                 padding: 5px;
+            }
+
+            .accumtotal {
+                font-size: 20px;
             }
 
             @media screen and (max-width: 825px) {
@@ -169,7 +173,7 @@
 
     <body>
         <header>
-            <h1>Bienvenido</h1>
+            <h1>Facturacion Babol Soda</h1>
         </header>
 
         <form method="post">
@@ -350,8 +354,8 @@
         </section>
 
         <footer>
-            Total $
-            <label id="final_total">0</label>
+            <label class="accumtotal">Total $</label>
+            <label class="accumtotal" id="final_total">0</label>
             <button type="submit" class="submit_button" formaction="/bill/save_bill/"> imprimir </button>
         </footer>
 
