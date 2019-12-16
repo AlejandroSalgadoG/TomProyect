@@ -107,10 +107,10 @@
                     <td>Numero de facturas</td> <td>{{n_bills}}</td>
                 </tr>
                 <tr>
-                    <td>Total de ventas</td> <td>{{total}}</td>
+                    <td>Total de ventas</td> <td>{{total_bills}}</td>
                 </tr>
                 <tr>
-                    <td>Total pagado en efectivo</td> <td>{{cash}}</td>
+                    <td>Total pagado en efectivo</td> <td>{{cash_bills}}</td>
                 </tr>
                 <tr>
                     <td>Total propinas</td> <td>{{tips}}</td>
@@ -118,15 +118,22 @@
             </table>
         </div>
 
-        <div class="separator"> </div>
-
         <div class="column">
             <table>
                 <tr>
                     <th>Egresos</th> <th>Total</th> 
                 </tr>
                 <tr>
-                    <td>Numero de gastos</td> <td>0</td>
+                    <td>Numero de egresos</td> <td>{{n_expenses}}</td>
+                </tr>
+                <tr>
+                    <td>Total de gastos</td> <td>{{total_expenses}}</td>
+                </tr>
+                <tr>
+                    <td>Total gastado en efectivo</td> <td>{{cash_expenses}}</td>
+                </tr>
+                <tr>
+                    <td>Total gastado con tarjeta</td> <td>{{card_expenses}}</td>
                 </tr>
             </table>
         </div>

@@ -101,36 +101,36 @@
           <button class="tablinks" onclick="location.href='/admn/inventary'">Inventario</button>
         </div>
 
-            <div class="separator"> </div>
+        <div class="separator"> </div>
 
-            <form action="/admn/records" method=get>
-                <input type="date" name="date_from" required> <input type="date" name="date_to">
-                <input type="submit" style="background-color: white;">
-            </form>
+        <form action="/admn/records" method=get>
+            <input type="date" name="date_from" required> <input type="date" name="date_to">
+            <input type="submit" style="background-color: white;">
+        </form>
 
-            <div class="separator"> </div>
+        <div class="separator"> </div>
 
-            {% for bill, purchases in bills %}
-                <button class="accordion">{{bill.date}}</button>
-                <div class="panel">
-                    <table>
+        {% for bill, purchases in bills %}
+            <button class="accordion">{{bill.date}}</button>
+            <div class="panel">
+                <table>
+                    <tr>
+                        <th>Productos</th> <th>Cantidad</th> <th>Precio</th>
+                    </tr>
+                    {% for purchase in purchases %}
                         <tr>
-                            <th>Productos</th> <th>Cantidad</th> <th>Precio</th>
+                            <td>{{purchase.product.name}}</td>
+                            <td>{{purchase.quantity}}</td> 
+                            {% if purchase.free %}
+                                <td>0</td>
+                            {% else %}
+                                <td>{{purchase.product.price}}</td>
+                            {% endif %}
                         </tr>
-                        {% for purchase in purchases %}
-                            <tr>
-                                <td>{{purchase.product.name}}</td>
-                                <td>{{purchase.quantity}}</td> 
-                                {% if purchase.free %}
-                                    <td>0</td>
-                                {% else %}
-                                    <td>{{purchase.product.price}}</td>
-                                {% endif %}
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+        {% endfor %}
     </body>
 
     <script>

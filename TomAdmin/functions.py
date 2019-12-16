@@ -1,16 +1,11 @@
 from django.utils.timezone import now
 
+from TomAdmin.models import Expense
 from TomBill.models import Bill, Purchase, Section, Product
 
 def get_bills_info(date_from, date_to):
     bills = []
     total, cash, tips = 0, 0, 0
-
-    if date_from is None:
-        date_from = now()
-
-    if date_to is None:
-        date_to = now()
 
     db_bills = Bill.objects.filter(date__gte=date_from, date__lte=date_to)
 
@@ -41,3 +36,19 @@ def update_products(request):
         product.save()
 
     return
+
+def get_expenses_info(date_from, date_to):
+    expenses = []
+    total, cash = 0, 0
+
+    db_expenses = Expense.objects.filter(date__gte=date_from, date__lte=date_to)
+
+    for expense in db_expenses:
+        total += expense.price
+
+        if expense.cash:
+            cash += expense.price
+
+        expenses.append(expense)
+
+    return expenses, len(expenses), total, cash

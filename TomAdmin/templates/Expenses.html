@@ -14,6 +14,10 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
 
+            section{
+                padding: 0px 10px;
+            }
+
             header {
               background-color: #666;
               padding: 1px;
@@ -37,6 +41,33 @@
               font-size: 17px;
             }
 
+            .separator {
+                border-bottom: 3px solid white;
+                border-left: white;
+                border-right: white;
+                padding: 10px;
+            }
+
+            .section_title{
+                color: black;
+                font-size: 20px;
+            }
+
+            input{
+                padding: 8px;
+                border-radius: 10px;
+                border: 2px solid #ea1d76;
+            }
+
+            td, th {
+              text-align: center;
+              padding: 5px;
+            }
+
+            tr:nth-child(odd) {
+              background-color: #babf10;
+            }
+
             .tab button:hover {
               background-color: #ddd;
             }
@@ -49,6 +80,7 @@
             <h1>Administración</h1>
         </header>
 
+
         <div class="tab">
           <button class="tablinks" onclick="location.href='/admn/accounting'">Contabilidad</button>
           <button class="tablinks" onclick="location.href='/admn/records'">Facturas</button>
@@ -56,5 +88,49 @@
           <button class="tablinks" onclick="location.href='/admn/products'">Productos</button>
           <button class="tablinks" onclick="location.href='/admn/inventary'">Inventario</button>
         </div>
+
+        <section>
+            <div class="separator"> </div>
+
+            <h3 class="section_title"> Ingresar egreso </h3>
+
+            <form action="/admn/expenses" method=post>
+                <input type="text" style="width: 350px;" name="description" required>
+                <input type="number" name="price" required>
+                <input type="date" name="date" required>
+                <b> Pago en efectivo </b>
+                Si <input type="radio" name="cash" checked="checked" onclick="no_cash.checked = false;">
+                No <input type="radio" name="no_cash" onclick="cash.checked = false;">
+                <input type="submit" style="background-color: white;">
+            </form>
+
+            <div class="separator"> </div>
+
+            <h3 class="section_title"> Consultar egresos </h3>
+
+            <form action="/admn/expenses" method=get>
+                <input type="date" name="date_from" required> <input type="date" name="date_to">
+                <input type="submit" style="background-color: white;">
+            </form>
+
+            <div class="separator"> </div>
+
+            <table>
+                <col width="150"> <col width="300"> <col width="150"> <col width="100">
+                <tr>
+                    <th>Fecha</th> <th>Descripcion</th> <th>Precio</th> <th>En efectivo</th>
+                </tr>
+                {% for expense, date in expenses %}
+                <tr>
+                    <td>{{date}}</td> <td>{{expense.description}}</td> <td>{{expense.price}}</td> 
+                    {% if expense.cash %}
+                    <td>Si</td>   
+                    {% else %}
+                    <td>no</td>   
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
     <body>
 </html>

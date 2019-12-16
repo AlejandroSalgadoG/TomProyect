@@ -1,9 +1,11 @@
-from datetime import datetime, timedelta
+from datetime import datetime
+from django.utils.timezone import now
 
 from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView
 
-from TomAdmin.functions import get_bills_info, update_products
+from TomAdmin.models import Expense
+from TomAdmin.functions import get_bills_info, update_products, get_expenses_info
 from TomBill.functions import get_db_products
 
 class Index(TemplateView):
@@ -24,12 +26,23 @@ class Accounting(TemplateView):
         if "date_to" in request.GET and request.GET["date_to"] != "":
             date_to = datetime.strptime(request.GET["date_to"], "%Y-%m-%d")
 
-        bills, n_bills, total, cash, tips, = get_bills_info(date_from, date_to)
+        if date_from is None:
+            date_from = now()
+
+        if date_to is None:
+            date_to = now()
+
+        bills, n_bills, total_bills, cash_bills, tips = get_bills_info(date_from, date_to)
+        expenses, n_expenses, total_expenses, cash_expenses = get_expenses_info(date_from, date_to)
 
         data = {"n_bills": n_bills,
-                "total": total,
-                "cash": cash,
-                "tips": tips}
+                "total_bills": total_bills,
+                "cash_bills": cash_bills,
+                "tips": tips,
+                "n_expenses": n_expenses,
+                "total_expenses": total_expenses,
+                "cash_expenses": cash_expenses,
+                "card_expenses": total_expenses - cash_expenses}
 
         return render(request, self.template, data)
 
@@ -45,9 +58,14 @@ class Records(TemplateView):
         if "date_from" in request.GET and request.GET["date_from"] != "":
             date_from = datetime.strptime(request.GET["date_from"], "%Y-%m-%d")
 
-
         if "date_to" in request.GET and request.GET["date_to"] != "":
             date_to = datetime.strptime(request.GET["date_to"], "%Y-%m-%d")
+
+        if date_from is None:
+            date_from = now()
+
+        if date_to is None:
+            date_to = now()
 
         bills, _, _, _, _ = get_bills_info(date_from, date_to)
 
@@ -57,6 +75,34 @@ class Expenses(TemplateView):
     template = 'Expenses.html'
 
     def get(self, request):
+        date_from, date_to = None, None
+
+        if "date_from" in request.GET and request.GET["date_from"] != "":
+            date_from = datetime.strptime(request.GET["date_from"], "%Y-%m-%d")
+
+        if "date_to" in request.GET and request.GET["date_to"] != "":
+            date_to = datetime.strptime(request.GET["date_to"], "%Y-%m-%d")
+
+        if date_from is None:
+            date_from = now()
+
+        if date_to is None:
+            date_to = now()
+
+        expenses = [ (expense, expense.date.date()) for expense in Expense.objects.filter(date__gte=date_from, date__lte=date_to)]
+
+        data = {"expenses": expenses}
+
+        return render(request, self.template, data)
+
+    def post(self, request):
+        date = request.POST["date"]
+        description = request.POST["description"]
+        price = request.POST["price"]
+        cash = "cash" in request.POST
+        
+        Expense(date=date, description=description, price=price, cash=cash).save()
+
         return render(request, self.template, {})
 
 class Products(TemplateView):
