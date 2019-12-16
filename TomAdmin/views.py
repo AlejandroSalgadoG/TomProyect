@@ -4,7 +4,7 @@ from django.utils.timezone import now
 from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView
 
-from TomAdmin.models import Expense
+from TomAdmin.models import Expense, Inventory
 from TomAdmin.functions import get_bills_info, update_products, get_expenses_info
 from TomBill.functions import get_db_products
 
@@ -120,8 +120,8 @@ class Products(TemplateView):
         update_products(request)
         return self.get(request)
         
-class Inventary(TemplateView):
-    template = 'Inventary.html'
+class Inventories(TemplateView):
+    template = 'Inventory.html'
 
     def get(self, request):
-        return render(request, self.template, {})
+        return render(request, self.template, {"inventory": Inventory.objects.all()})

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            header {
+              background-color: #666;
+              padding: 1px;
+              text-align: center;
+              font-size: 12px;
+              color: white;
+            }
+
+            .tab {
+              overflow: hidden;
+              background-color: #00c4b3;
+            }
+
+            .tab button {
+              background-color: inherit;
+              color: white;
+              float: left;
+              border: none;
+              outline: none;
+              padding: 14px 16px;
+              font-size: 17px;
+            }
+
+            .separator {
+                border-bottom: 3px solid white;
+                border-left: white;
+                border-right: white;
+                padding: 5px;
+            }
+
+            .column {
+                float: left;
+                width: 50%;
+                padding: 10px;
+            }
+
+            .elem1{
+                float: left;
+                width: 80%;
+                padding: 5px;
+                text-align: left;
+            }
+
+            .elem2{
+                float: left;
+                width: 10%;
+                padding: 5px;
+            }
+
+            .elem3{
+                float: left;
+                width: 10%;
+                padding: 12px;
+                background-color: #ea1d76;
+            }
+
+            .add_button{
+                height: 38px;
+                width: 100%;
+                background-color: #babf10;
+            }
+
+            .submit_button{
+                height: 38px;
+                width: 100%;
+                background-color: #00c4b3;
+                color: white;
+            }
+
+            .tab button:hover {
+              background-color: #ddd;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>Administración</h1>
+        </header>
+
+        <div class="tab">
+          <button class="tablinks" onclick="location.href='/admn/accounting'">Contabilidad</button>
+          <button class="tablinks" onclick="location.href='/admn/records'">Facturas</button>
+          <button class="tablinks" onclick="location.href='/admn/expenses'">Gastos</button>
+          <button class="tablinks" onclick="location.href='/admn/products'">Productos</button>
+          <button class="tablinks" onclick="location.href='/admn/inventory'">Inventario</button>
+        </div>
+
+        <hr class="separator">
+
+        <form method="post" >
+
+        <div class="column">
+
+            {% for element in inventory%}
+            <div>
+                <input class="elem1" name="name" value="{{element.name}}"/>
+                <input class="elem2" name="quantity" value="{{element.quantity}}"/>
+                <button class="elem3" type="button"/>
+            </div>
+            {% endfor %}
+
+            <button type="button" class="add_button"/> Agregar producto </button>
+        </div>
+
+        <footer>
+            <button type="submit" class="submit_button"> Actualizar </button>
+        </footer>
+
+        </form>
+    <body>
+</html>

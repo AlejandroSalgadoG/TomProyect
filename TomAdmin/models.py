@@ -6,3 +6,7 @@ class Expense(models.Model):
     description = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
     cash = models.BooleanField(default=True)
+
+class Inventory(models.Model):
+    name = models.CharField(max_length=100)
+    quantity = models.IntegerField(default=0)
