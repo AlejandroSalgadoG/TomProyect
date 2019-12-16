@@ -1,10 +1,10 @@
 from TomBill.models import Section, Product
 
-d_soda = Section(name="Sodas Dobles")
-soda = Section(name="Sodas")
-addition = Section(name="Adiciones")
-bakery = Section(name="Panaderia")
-coffe = Section(name="Cafe")
+d_soda = Section(html="dsodas", name="Sodas Dobles")
+soda = Section(html="sodas", name="Sodas")
+addition = Section(html="additions", name="Adiciones")
+bakery = Section(html="bakery", name="Panaderia")
+coffe = Section(html="coffe", name="Cafe")
 
 d_soda.save()
 soda.save()

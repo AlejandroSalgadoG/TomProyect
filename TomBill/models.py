@@ -4,6 +4,7 @@ from django.utils.timezone import now
 date_format = '%d/%m/%Y-%H:%M:%S'
 
 class Section(models.Model):
+    html = models.CharField(max_length=25)
     name = models.CharField(max_length=50)
 
 class Product(models.Model):

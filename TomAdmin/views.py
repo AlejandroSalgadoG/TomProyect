@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView
 
-from TomAdmin.functions import get_bills_info
+from TomAdmin.functions import get_bills_info, update_products
 from TomBill.functions import get_db_products
 
 class Index(TemplateView):
@@ -70,6 +70,10 @@ class Products(TemplateView):
 
         return render(request, self.template, data)
 
+    def post(self, request):
+        update_products(request)
+        return self.get(request)
+        
 class Inventary(TemplateView):
     template = 'Inventary.html'
 

@@ -133,7 +133,7 @@
           <button class="tablinks" onclick="location.href='/admn/inventary'">Inventario</button>
         </div>
 
-        <form method="post">
+        <form method="post" >
 
         <section>
             <div class="column">
@@ -142,7 +142,7 @@
                 {% for product in double_sodas%}
 
                 <div>
-                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem1" name="dsodas_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
                     <button type="button" class="elem4"/>
@@ -159,7 +159,7 @@
                 {% for product in additions%}
 
                 <div>
-                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem1" name="additions_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
                     <button type="button" class="elem4"/>
@@ -176,7 +176,7 @@
                 {% for product in sodas%}
 
                 <div>
-                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem1" name="sodas_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
                     <button type="button" class="elem4"/>
@@ -193,7 +193,7 @@
                 {% for product in coffe%}
 
                 <div>
-                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem1" name="coffe_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
                     <button type="button" class="elem4"/>
@@ -210,7 +210,7 @@
                 {% for product in bakery%}
 
                 <div>
-                    <input class="elem1" name="{{product.html}}" value="{{product.name}}"/>
+                    <input class="elem1" name="bakery_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
                     <button type="button" class="elem4"/>
@@ -223,7 +223,7 @@
         </section>
 
         <footer>
-            <button type="submit" class="submit_button" formaction="/admn/update_products/"> actualizar </button>
+            <button type="submit" class="submit_button"> actualizar </button>
         </footer>
 
         </form>

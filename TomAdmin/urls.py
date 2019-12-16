@@ -8,5 +8,5 @@ urlpatterns = [
     path('records', views.Records.as_view()),
     path('expenses', views.Expenses.as_view()),
     path('products', views.Products.as_view()),
-    path('inventary', views.Inventary.as_view())
+    path('inventary', views.Inventary.as_view()),
 ]
