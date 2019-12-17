@@ -120,6 +120,55 @@
         </style>
     </head>
 
+    <script>
+        function add_element(add_button, section_name){
+            var element_name = "Nuevo";
+
+            var div = document.createElement("div");
+
+            var short_name = document.createElement("input");
+            short_name.className = "elem2";
+            short_name.name = "short_" + element_name;
+            short_name.value = element_name;
+
+            var price = document.createElement("input");
+            price.className = "elem3";
+            price.name = "price_" + element_name;
+            price.value = 0;
+
+            var name = document.createElement("input");
+            name.className = "elem1";
+            name.name = section_name + "_" + element_name;
+            name.value = element_name;
+            name.onchange = function(){
+                                var html_name = this.value.replace(" ", "_");
+                                this.name = section_name + '_' + html_name;
+                                short_name.name = 'short_' + html_name;
+                                price.name = 'price_' + html_name;
+                            }
+
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "elem4";
+            button.onclick = function(){
+                                var element = this.parentNode; 
+                                element.parentNode.removeChild(element);
+                             }
+
+            div.appendChild(name);
+            div.appendChild(short_name);
+            div.appendChild(price);
+            div.appendChild(button);
+
+            add_button.parentNode.insertBefore(div, add_button);
+        }
+
+        function remove_element(remove_button){
+            var element = remove_button.parentNode;
+            element.parentNode.removeChild(element);
+        }
+    </script>
+
     <body>
         <header>
             <h1>Administración</h1>
@@ -145,12 +194,12 @@
                     <input class="elem1" name="dsodas_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
-                    <button type="button" class="elem4"/>
+                    <button type="button" class="elem4" onclick="remove_element(this)"/>
                 </div>
 
                 {% endfor %}
 
-                <button type="button" class="add_button"/> Agregar producto </button>
+                <button type="button" class="add_button" onclick="add_element(this, 'dsodas')"/> Agregar producto </button>
 
                 <hr class="separator">
 
@@ -162,12 +211,12 @@
                     <input class="elem1" name="additions_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
-                    <button type="button" class="elem4"/>
+                    <button type="button" class="elem4" onclick="remove_element(this)"/>
                 </div>
 
                 {% endfor %}
 
-                <button type="button" class="add_button"/> Agregar producto </button>
+                <button type="button" class="add_button" onclick="add_element(this, 'additions')"/> Agregar producto </button>
             </div>
 
             <div class="column">
@@ -179,12 +228,12 @@
                     <input class="elem1" name="sodas_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
-                    <button type="button" class="elem4"/>
+                    <button type="button" class="elem4" onclick="remove_element(this)"/>
                 </div>
 
                 {% endfor %}
 
-                <button type="button" class="add_button"/> Agregar producto </button>
+                <button type="button" class="add_button" onclick="add_element(this, 'sodas')"/> Agregar producto </button>
             </div>
 
             <div class="column">
@@ -196,12 +245,12 @@
                     <input class="elem1" name="coffe_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
-                    <button type="button" class="elem4"/>
+                    <button type="button" class="elem4" onclick="remove_element(this)"/>
                 </div>
 
                 {% endfor %}
 
-                <button type="button" class="add_button"/> Agregar producto </button>
+                <button type="button" class="add_button" onclick="add_element(this, 'coffe')"/> Agregar producto </button>
 
                 <hr class="separator">
 
@@ -213,12 +262,12 @@
                     <input class="elem1" name="bakery_{{product.html}}" value="{{product.name}}"/>
                     <input class="elem2" name="short_{{product.html}}" value="{{product.short}}"/>
                     <input class="elem3" name="price_{{product.html}}" value="{{product.price}}"/>
-                    <button type="button" class="elem4"/>
+                    <button type="button" class="elem4" onclick="remove_element(this)"/>
                 </div>
 
                 {% endfor %}
 
-                <button type="button" class="add_button"/> Agregar producto </button>
+                <button type="button" class="add_button" onclick="add_element(this, 'bakery')"/> Agregar producto </button>
             </div>
         </section>
 

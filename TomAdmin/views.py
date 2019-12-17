@@ -117,7 +117,7 @@ class Products(TemplateView):
         return render(request, self.template, data)
 
     def post(self, request):
-        update_products(request)
+        update_products(request.POST)
         return self.get(request)
         
 class Inventories(TemplateView):
