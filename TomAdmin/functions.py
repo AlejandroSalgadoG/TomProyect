@@ -1,6 +1,6 @@
 from django.utils.timezone import now
 
-from TomAdmin.models import Expense
+from TomAdmin.models import Expense, Inventory
 from TomBill.models import Bill, Purchase, Section, Product
 
 def get_bills_info(date_from, date_to):
@@ -64,3 +64,23 @@ def get_expenses_info(date_from, date_to):
         expenses.append(expense)
 
     return expenses, len(expenses), total, cash
+
+def update_inventory(element, name, data):
+    element.name = data[name]
+    element.quantity = data["quantity_" + name]
+    element.save()
+
+def update_inventories(data):
+    elements = Inventory.objects.all()
+    names = [key for key in data if not key.startswith("quantity")]
+         
+    for element in elements:
+        founded = False
+        for name in names:
+            if element.name == name:
+                update_inventory(element, name, data)
+                names.remove(name)
+                founded = True
+
+    for name in names:
+        update_inventory(Inventory(), name, data)

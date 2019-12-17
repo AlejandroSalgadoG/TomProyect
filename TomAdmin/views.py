@@ -5,7 +5,7 @@ from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView
 
 from TomAdmin.models import Expense, Inventory
-from TomAdmin.functions import get_bills_info, update_products, get_expenses_info
+from TomAdmin.functions import get_bills_info, update_products, get_expenses_info, update_inventories
 from TomBill.functions import get_db_products
 
 class Index(TemplateView):
@@ -125,3 +125,7 @@ class Inventories(TemplateView):
 
     def get(self, request):
         return render(request, self.template, {"inventory": Inventory.objects.all()})
+
+    def post(self, request):
+        update_inventories(request.POST)
+        return self.get(request)

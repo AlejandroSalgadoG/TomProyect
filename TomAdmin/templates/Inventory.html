@@ -90,6 +90,48 @@
         </style>
     </head>
 
+    <script>
+        function add_element(add_button){
+            var element_name = "Nuevo";
+
+            var div = document.createElement("div");
+
+            var quantity = document.createElement("input");
+            quantity.className = "elem2";
+            quantity.name = "quantity_" + element_name;
+            quantity.value = 0;
+
+            var name = document.createElement("input");
+            name.className = "elem1";
+            name.name = element_name;
+            name.value = element_name;
+            name.onchange = function(){
+                                var html_name = this.value.replace(" ", "_");
+                                this.name = html_name;
+                                quantity.name = 'quantity_' + html_name;
+                            }
+
+            var button = document.createElement("button");
+            button.type = "button";
+            button.className = "elem3";
+            button.onclick = function(){
+                                var element = this.parentNode; 
+                                element.parentNode.removeChild(element);
+                             }
+
+            div.appendChild(name);
+            div.appendChild(quantity);
+            div.appendChild(button);
+
+            add_button.parentNode.insertBefore(div, add_button);
+        }
+
+        function remove_element(remove_button){
+            var element = remove_button.parentNode;
+            element.parentNode.removeChild(element);
+        }
+    </script>
+
     <body>
         <header>
             <h1>Administración</h1>
@@ -105,19 +147,19 @@
 
         <hr class="separator">
 
-        <form method="post" >
+        <form method="post">
 
         <div class="column">
 
             {% for element in inventory%}
             <div>
-                <input class="elem1" name="name" value="{{element.name}}"/>
-                <input class="elem2" name="quantity" value="{{element.quantity}}"/>
-                <button class="elem3" type="button"/>
+                <input class="elem1" name="{{element.name}}" value="{{element.name}}"/>
+                <input class="elem2" name="quantity_{{element.name}}" value="{{element.quantity}}"/>
+                <button class="elem3" type="button" onclick="remove_element(this)"/>
             </div>
             {% endfor %}
 
-            <button type="button" class="add_button"/> Agregar producto </button>
+            <button type="button" class="add_button" onclick="add_element(this)"/> Agregar producto </button>
         </div>
 
         <footer>
