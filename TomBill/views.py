@@ -36,7 +36,7 @@ def save_bill(request):
 
     bill = register_bill(date, name, products, additions_prod, tip, cash)
 
-    #print_document( type_bill(bill) )
-    #print_document( type_order(bill) )
+    print_document( type_bill(bill) )
+    print_document( type_order(bill) )
 
     return redirect('/bill/')
