@@ -37,6 +37,9 @@ def update_products(data):
                 html_ids.remove(html_id)
                 founded = True
 
+        if not founded:
+            product.delete()
+
     for html_id in html_ids:
         update_product(Product(), html_id, data)
 
@@ -81,6 +84,9 @@ def update_inventories(data):
                 update_inventory(element, name, data)
                 names.remove(name)
                 founded = True
+
+        if not founded:
+            product.delete()
 
     for name in names:
         update_inventory(Inventory(), name, data)
